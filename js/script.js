@@ -12,7 +12,7 @@ const createHelpContent = (helpItems, parentSelector) => {
   const parentElement = document.querySelector(parentSelector);
 
   helpItems.forEach((item) => {
-    const { text, src } = item;
+    const { title, src } = item;
 
     const element = document.createElement('div');
     element.setAttribute('class', 'help__item');
@@ -23,15 +23,13 @@ const createHelpContent = (helpItems, parentSelector) => {
 
     const p = document.createElement('p');
     p.setAttribute('class', 'help__text');
-    p.textContent = text;
+    p.textContent = title;
 
     element.append(span, p);
     parentElement.append(element);
   });
 
 };
-
-// через class
 
 getDataFromJson('./assets/json/help.json')
   .then((data) => createHelpContent(data, '.help__items'))

@@ -2,6 +2,7 @@
   padding: 15px 45px;
   border-radius: 100px;
   border: none;
+  transition: 0.2s;
 
   background-color: $primary__color;
   color: $dark-3xl__color;
@@ -10,4 +11,10 @@
   letter-spacing: 1.02px;
 
   cursor: pointer;
+
+  &:hover {
+    background-color: $primary-light__color;
+    transition: 0.4s;
+  }
+
 }

@@ -17,15 +17,15 @@
       <nav class="navigation">
         <ul class="navigation__list">
           <li class="navigation__item"><a href="" class="navigation__link navigation__link_active">About the shelter</a></li>
-          <li class="navigation__item"><a href="" class="navigation__link">Our pets</a></li>
-          <li class="navigation__item"><a href="" class="navigation__link">Help the shelter</a></li>
-          <li class="navigation__item"><a href="" class="navigation__link">Contacts</a></li>
+          <li class="navigation__item"><a href="#our-friends" class="navigation__link">Our pets</a></li>
+          <li class="navigation__item"><a href="#help" class="navigation__link">Help the shelter</a></li>
+          <li class="navigation__item"><a href="#contacts" class="navigation__link">Contacts</a></li>
         </ul>
       </nav>
     </div>
   </header>
   <main>
-    <section class="not-only">
+    <section id="not-only" class="not-only">
       <div class="wrapper not-only__wrapper">
         <div class="not-only__content">
           <h2 class="not-only__header">Not only people need a house</h2>
@@ -38,7 +38,7 @@
         <img class="not-only__img" src="./assets/images/not-only-puppy.png" alt="primary puppy"></img>
       </div>
     </section>
-    <section class="about">
+    <section id="about" class="about">
       <div class="wrapper about__wrapper">
         <img class="about__img" src="./assets/images/about-pets.png" alt="about pets">
         <div class="about__content">
@@ -55,7 +55,7 @@
         </div>
       </div>
     </section>
-    <section class="out-friends">
+    <section id="our-friends" class="out-friends">
       <div class="wrapper our-friends__wrapper">
         <h3 class="our-friends__header">
           Our friends who
@@ -92,47 +92,10 @@
         <button class="button">Get to know the rest</button>
       </div>
     </section>
-    <section class="help">
+    <section id="help" class="help">
       <div class="wrapper help__wrapper">
         <h3 class="help__header">How you can help our shelter</h3>
-        <div class="help__items">
-          <!-- <div class="help__item">
-            <span class="help__icon pet-food"></span>
-            <p class="help__text">Pet food</p>
-          </div>
-          <div class="help__item">
-            <span class="help__icon transportation"></span>
-            <p class="help__text">Transportation</p>
-          </div>
-          <div class="help__item">
-            <span class="help__icon toys"></span>
-            <p class="help__text">Toys</p>
-          </div>
-          <div class="help__item">
-            <span class="help__icon bowls-and-cups"></span>
-            <p class="help__text">Bowls and cups</p>
-          </div>
-          <div class="help__item">
-            <span class="help__icon shampoos"></span>
-            <p class="help__text">Shampoos</p>
-          </div>
-          <div class="help__item">
-            <span class="help__icon vitamins"></span>
-            <p class="help__text">Vitamins</p>
-          </div>
-          <div class="help__item">
-            <span class="help__icon medicines"></span>
-            <p class="help__text">Medicines</p>
-          </div>
-          <div class="help__item">
-            <span class="help__icon collars"></span>
-            <p class="help__text">Collars / leashes</p>
-          </div>
-          <div class="help__item">
-            <span class="help__icon sleeping"></span>
-            <p class="help__text">Sleeping areas</p>
-          </div> -->
-        </div>
+        <div class="help__items"></div>
       </div>
     </section>
     <section class="donation">
@@ -154,29 +117,29 @@
       </div>
     </section>
   </main>
-  <footer class="footer">
+  <footer id="contacts" class="footer">
     <div class="wrapper footer__wrapper">
       <div class="footer__content footer__content-left">
         <h3 class="footer__header">For questions and suggestions</h3>
-        <div class="footer__data" href="mailto:email@shelter.com">
+        <a class="footer__data" href="mailto:email@shelter.com" target="_blank">
           <span class="footer__icon email__icon"></span>
           <p class="footer__text">email@shelter.com</p>
-        </div>
-        <div class="footer__data" href="tel:+136745677554">
+        </a>
+        <a class="footer__data" href="tel:+136745677554" target="_blank">
           <span class="footer__icon phone__icon"></span>
           <p class="footer__text">+13 674 567 75 54</p>
-        </div>
+        </a>
       </div>
       <div class="footer__content footer__content-right">
         <h3 class="footer__header">We are waiting for your visit</h3>
-        <div class="footer__data">
+        <a class="footer__data" href="https://goo.gl/maps/duhxY8netXpNAESC6" target="_blank">
           <span class="footer__icon marker__icon"></span>
           <p class="footer__text">1 Central Street, Boston<br>(entrance from the store)</p>
-        </div>
-        <div class="footer__data">
+        </a>
+        <a class="footer__data" href="https://goo.gl/maps/n2Fjr5JYZPiEp9oJ9" target="_blank">
           <span class="footer__icon marker__icon"></span>
           <p class="footer__text">18 South Park, London</p>
-        </div>
+        </a>
       </div>
       <img class="footer__img" src="./assets/images/footer-puppy.png" alt="puppy">
     </div>
