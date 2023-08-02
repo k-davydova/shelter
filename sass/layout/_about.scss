@@ -1,0 +1,35 @@
+.about {
+  padding-top: 80px;
+  padding-bottom: 100px;
+  background-color: $light-xl__color;
+}
+
+.about__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
+}
+
+.about__img {
+  max-width: 100%;
+  height: auto;
+}
+
+.about__content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.about__header {
+  max-width: 370px;
+}
+
+.about__text {
+  max-width: 430px;
+
+  color: $dark-xl__color;
+  font-family: $arial__font;
+  line-height: 24px;
+}

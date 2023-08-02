@@ -1,0 +1,13 @@
+.button {
+  padding: 15px 45px;
+  border-radius: 100px;
+  border: none;
+
+  background-color: $primary__color;
+  color: $dark-3xl__color;
+  font-size: 17px;
+  line-height: 130%;
+  letter-spacing: 1.02px;
+
+  cursor: pointer;
+}

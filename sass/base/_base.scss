@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-x: hidden;
+
+  font-family: $georgia__font;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+h1 {
+  color: $primary__color;
+  font-size: 32px;
+  line-height: 35.2px;
+  letter-spacing: 1.92px;
+}
+
+h2 {
+  color: $light-xl__color;
+  font-size: 44px;
+  line-height: 57.2px;
+}
+
+h3 {
+  color: $dark-l__color;
+  font-size: 35px;
+  line-height: 45.5px;
+  letter-spacing: 2.1px;
+}
+
+p {
+  font-size: 15px;
+}

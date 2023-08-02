@@ -1,0 +1,23 @@
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.logo__title {
+  margin-bottom: 10px;
+}
+
+.logo__subtitle {
+  color: $light-xl__color;
+  font-family: $arial__font;
+  font-size: 13px;
+  line-height: normal;
+  letter-spacing: 1.3px;
+}
+
+.navigation__link_active {
+  color: $light-s__color;
+  border-bottom: 3px solid $primary__color;
+}
