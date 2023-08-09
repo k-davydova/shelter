@@ -1,0 +1,45 @@
+.burger-menu {
+  display: none;
+
+  @media screen and (max-width: $mobile-screen) {
+    display: block;
+    position: relative;
+    z-index: 5;
+    margin-right: 42px;
+    transition: 0.4s;
+
+    &._active {
+      transform: rotate(90deg);
+      transition: 0.4s;
+    }
+
+  }
+
+}
+
+.burger__line {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: $primary__color;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background-color: $primary__color;
+
+  }
+
+  &::after {
+    top: 10px;
+  }
+
+  &::before {
+    top: -10px;
+  }
+
+}

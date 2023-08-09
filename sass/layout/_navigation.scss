@@ -1,17 +1,42 @@
+.navigation {
+
+  @media screen and (max-width: $mobile-screen) {
+    position: fixed;
+    z-index: 4;
+    top: 0;
+    right: -100vw;
+    width: 320px;
+    height: 100vh;
+    padding: 248px 38px 248px 39px;
+    background-color: $dark-3xl__color;
+    transition: 0.4s;
+
+    &._active {
+      top: 0;
+      right: 0;
+      transition: 0.4s;
+    }
+  }
+
+}
+
 .navigation__list {
   display: flex;
   gap: 35px;
   list-style: none;
+
+  @media screen and (max-width: $mobile-screen) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .navigation__link {
   text-decoration: none;
+  padding-bottom: 3px;
 
   color: $dark-s__color;
   font-family: $arial__font;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 24px;
 
   &_active {
@@ -21,6 +46,24 @@
 
   &:hover {
     color: $light-s__color;
+  }
+
+  &_our-pets {
+    color: $dark-l__color;
+
+    &_active {
+      color: $dark-3xl__color;
+      border-bottom: 3px solid $primary__color;
+    }
+
+    &:hover {
+      color: $dark-3xl__color;
+    }
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    font-size: 32px;
+    line-height: 51.2px;
   }
 
 }

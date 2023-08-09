@@ -1,4 +1,16 @@
 .wrapper {
   max-width: $desktop-width;
   margin: 0 auto;
+  padding: 0 40px 0 40px;
+
+  @media screen and (max-width: $tablet-screen) {
+    max-width: 100%;
+    padding: 0 30px 0 30px;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 100%;
+    padding: 0 10px 0 10px;
+  }
+
 }

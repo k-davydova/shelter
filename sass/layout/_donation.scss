@@ -1,8 +1,11 @@
 .donation {
-  padding-top: 80px;
-  padding-bottom: 100px;
-
+  padding: 80px 0 100px 0;
   background-color: $light-l__color;
+
+  @media screen and (max-width: $mobile-screen) {
+    padding: 42px 0 42px 0;
+  }
+
 }
 
 .donation__wrapper {
@@ -10,34 +13,66 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
+
+  @media screen and (max-width: $tablet-screen) {
+    flex-direction: column-reverse;
+    gap: 60px;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    gap: 42px;
+  }
+
 }
 
 .donation__img {
   max-width: 100%;
   height: auto;
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 260px;
+  }
 }
 
 .donation__content {
-  width: 380px;
+  max-width: 380px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media screen and (max-width: $mobile-screen) {
+    padding: 0 10px 0 10px;
+    align-items: center;
+  }
+
 }
 
 .donation__header {
   max-width: 300px;
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 220px;
+  }
+
 }
 
 .donation__text {
   color: $dark-l__color;
   line-height: 16.5px;
   letter-spacing: 0.9px;
+
+  @media screen and (max-width: $mobile-screen) {
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+
 }
 
 .donation-card__wrapper {
   width: fit-content;
-  padding: 10px 15px;
+  padding: 10px 14px;
   display: flex;
+  align-items: center;
   gap: 15px;
 
   background-color: $primary__color;
@@ -67,6 +102,13 @@
   letter-spacing: 1.2px;
 
   color: $dark-l__color;
+
+  @media screen and (max-width: $mobile-screen) {
+    font-size: 15px;
+    line-height: 16.5px;
+    letter-spacing: 0.9px;
+  }
+
 }
 
 .donation__subtext {
@@ -75,4 +117,9 @@
   font-size: 12px;
   font-style: italic;
   line-height: 18px;
+
+  @media screen and (max-width: $mobile-screen) {
+    text-align: justify;
+  }
+
 }

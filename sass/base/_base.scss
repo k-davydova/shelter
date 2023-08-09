@@ -9,7 +9,6 @@ html {
 
 body {
   width: 100vw;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,6 +18,11 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  &._active {
+    height: 100vh;
+    overflow: hidden;
+  }
 }
 
 h1 {
@@ -32,6 +36,14 @@ h2 {
   color: $light-xl__color;
   font-size: 44px;
   line-height: 57.2px;
+
+  @media screen and (max-width: $mobile-screen) {
+    text-align: center;
+    font-size: 25px;
+    line-height: 32.5px;
+    letter-spacing: 1.5px;
+  }
+
 }
 
 h3 {
@@ -39,6 +51,21 @@ h3 {
   font-size: 35px;
   line-height: 45.5px;
   letter-spacing: 2.1px;
+
+  @media screen and (max-width: $mobile-screen) {
+    text-align: center;
+    font-size: 25px;
+    line-height: 32.5px;
+    letter-spacing: 1.5px;
+  }
+
+}
+
+h4 {
+  color: $dark__color;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 1.2px;
 }
 
 p {

@@ -1,11 +1,26 @@
 .not-only {
   padding-top: 180px;
   background: url('../assets/images/noise_transparent.png'), radial-gradient(237.50% 111.80% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
+
+  @media screen and (max-width: $tablet-screen) {
+    padding-top: 150px;
+  }
+
 }
 
 .not-only__wrapper {
   display: flex;
   gap: 42px;
+
+  @media screen and (max-width: $tablet-screen) {
+    flex-direction: column;
+    gap: 100px;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    gap: 105px;
+  }
+
 }
 
 .not-only__content {
@@ -14,19 +29,52 @@
   flex-direction: column;
   align-items: start;
   gap: 42px;
+
+  @media screen and (max-width: $tablet-screen) {
+    margin: 0;
+    width: fit-content;
+    align-items: center;
+    align-self: center;
+  }
+
 }
 
 .not-only__header {
   max-width: 310px;
+
+  @media screen and (max-width: $tablet-screen) {
+    align-self: start;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 220px;
+    align-self: center;
+  }
+
 }
 
 .not-only__text {
   max-width: 460px;
   color: $dark-s__color;
   line-height: 24px;
+
+  @media screen and (max-width: $mobile-screen) {
+    text-align: center;
+  }
+
 }
 
 .not-only__img {
   max-width: 100%;
   height: auto;
+
+  @media screen and (max-width: $tablet-screen) {
+    max-width: 567px;
+    align-self: end;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 260px;
+  }
+
 }

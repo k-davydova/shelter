@@ -1,8 +1,13 @@
 .help {
-padding-top: 80px;
-padding-bottom: 100px;
+  padding-top: 80px;
+  padding-bottom: 100px;
 
-background-color: $light-xl__color;
+  background-color: $light-xl__color;
+
+  @media screen and (max-width: $mobile-screen) {
+    padding: 42px 0 42px 0;
+  }
+
 }
 
 .help__wrapper {
@@ -10,11 +15,20 @@ background-color: $light-xl__color;
   flex-direction: column;
   align-items: center;
   gap: 60px;
+
+  @media screen and (max-width: $mobile-screen) {
+    gap: 42px;
+  }
 }
 
 .help__header {
   max-width: 310px;
   text-align: center;
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 240px;
+  }
+
 }
 
 .help__items {
@@ -23,6 +37,17 @@ background-color: $light-xl__color;
   justify-content: center;
   align-items: center;
   gap: 55px 120px;
+
+  @media screen and (max-width: $tablet-screen) {
+    gap: 55px 60px;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 290px;
+    justify-content: start;
+    gap: 30px;
+  }
+
 }
 
 .help__item {
@@ -30,14 +55,29 @@ background-color: $light-xl__color;
   flex-direction: column;
   align-items: center;
   gap: 30px;
+
+  @media screen and (max-width: $tablet-screen) {
+    width: 170px;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    width: 130px;
+    gap: 20px;
+  }
+
 }
 
 .help__icon {
   width: 60px;
   height: 60px;
   display: block;
-
+  background-size: contain;
   background-repeat: no-repeat;
+
+  @media screen and (max-width: $mobile-screen) {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .help__text {
@@ -47,4 +87,10 @@ background-color: $light-xl__color;
   font-size: 20px;
   line-height: 23px;
   letter-spacing: 1.2px;
+
+  @media screen and (max-width: $mobile-screen) {
+    font-size: 15px;
+    line-height: 16.5px;
+    letter-spacing: 0.9px;
+  }
 }

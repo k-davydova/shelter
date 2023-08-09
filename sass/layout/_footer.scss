@@ -1,17 +1,42 @@
 .footer {
   padding-top: 40px;
   background: url('../assets/images/noise_transparent.png'), radial-gradient(549.89% 73.65% at 5.73% 50.00%, #513D2F 0%, #1A1A1C 100%), #211F20;
+
+  @media screen and (max-width: $tablet-screen) {
+    padding-top: 30px;
+  }
+
 }
 
 .footer__wrapper {
   display: flex;
   gap: 160px;
+
+  @media screen and (max-width: $tablet-screen) {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    gap: 40px;
+  }
+
 }
 
 .footer__content {
   display: flex;
   flex-direction: column;
   padding-top: 16px;
+
+  @media screen and (max-width: $tablet-screen) {
+    padding-top: 0;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    align-items: center;
+  }
+
 }
 
 .footer__content-left {
@@ -22,10 +47,26 @@
 .footer__content-right {
   max-width: 302px;
   gap: 34px;
+
+  @media screen and (max-width: $mobile-screen) {
+    align-items: start;
+    gap: 38px;
+
+    .footer__header {
+      align-self: center;
+    }
+
+  }
+
 }
 
 .footer__header {
   color: $light-xl__color;
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 270px;
+  }
+
 }
 
 .footer__data {
@@ -77,4 +118,9 @@
 .footer__img {
   max-width: 100%;
   height: auto;
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 260px;
+  }
+
 }

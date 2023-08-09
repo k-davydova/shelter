@@ -11,10 +11,15 @@
   letter-spacing: 1.02px;
 
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     background-color: $primary-light__color;
     transition: 0.4s;
+  }
+
+  @media screen and (max-width: $tablet-screen) {
+    align-self: center;
   }
 
 }

@@ -1,17 +1,7 @@
-// Utils
+const createHelpContent = (helpData) => {
+  const parentElement = document.querySelector('.help__items');
 
-const getDataFromJson = async (src) => {
-  const res = await fetch(src);
-  const data = await res.json();
-  return data;
-};
-
-// Help
-
-const createHelpContent = (helpItems, parentSelector) => {
-  const parentElement = document.querySelector(parentSelector);
-
-  helpItems.forEach((item) => {
+  helpData.forEach((item) => {
     const { title, src } = item;
 
     const element = document.createElement('div');
@@ -31,6 +21,4 @@ const createHelpContent = (helpItems, parentSelector) => {
 
 };
 
-getDataFromJson('./assets/json/help.json')
-  .then((data) => createHelpContent(data, '.help__items'))
-  .catch((error) => console.error(error));
+export { createHelpContent };

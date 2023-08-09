@@ -2,6 +2,12 @@
   padding-top: 80px;
   padding-bottom: 100px;
   background-color: $light-xl__color;
+
+  @media screen and (max-width: $mobile-screen) {
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+
 }
 
 .about__wrapper {
@@ -9,21 +15,48 @@
   justify-content: center;
   align-items: center;
   gap: 120px;
+
+  @media screen and (max-width: $tablet-screen) {
+    flex-direction: column-reverse;
+    gap: 80px;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    gap: 42px;
+  }
+
 }
 
 .about__img {
   max-width: 100%;
   height: auto;
+
+  @media screen and (max-width: $mobile-screen) {
+    padding: 0 20px 0 20px;
+  }
+
 }
 
 .about__content {
   display: flex;
   flex-direction: column;
   gap: 25px;
+
+  @media screen and (max-width: $mobile-screen) {
+    padding: 0 15px 0 15px;
+    align-items: center;
+    gap: 22px;
+  }
+
 }
 
 .about__header {
   max-width: 370px;
+
+  @media screen and (max-width: $mobile-screen) {
+    max-width: 240px;
+  }
+
 }
 
 .about__text {
@@ -32,4 +65,9 @@
   color: $dark-xl__color;
   font-family: $arial__font;
   line-height: 24px;
+
+  @media screen and (max-width: $mobile-screen) {
+    text-align: justify;
+  }
+
 }

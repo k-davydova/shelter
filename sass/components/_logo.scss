@@ -3,6 +3,17 @@
   flex-direction: column;
   align-items: center;
 
+  &_our-pets {
+
+    .logo__title {
+      color: $dark-l__color;
+    }
+
+    .logo__subtitle {
+      color: $dark-3xl__color;
+    }
+
+  }
 }
 
 .logo__title {

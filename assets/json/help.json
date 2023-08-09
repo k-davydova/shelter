@@ -1,38 +1,38 @@
 [
   {
     "title": "Pet food",
-    "src": "./assets/images/help/pet-food.svg"
+    "src": "../assets/images/help/pet-food.svg"
   },
   {
     "title": "Transportation",
-    "src": "./assets/images/help/transportation.svg"
+    "src": "../assets/images/help/transportation.svg"
   },
   {
     "title": "Toys",
-    "src": "./assets/images/help/toys.svg"
+    "src": "../assets/images/help/toys.svg"
   },
   {
     "title": "Bowls and cups",
-    "src": "./assets/images/help/bowls-and-cups.svg"
+    "src": "../assets/images/help/bowls-and-cups.svg"
   },
   {
     "title": "Shampoos",
-    "src": "./assets/images/help/shampoos.svg"
+    "src": "../assets/images/help/shampoos.svg"
   },
   {
     "title": "Vitamins",
-     "src": "./assets/images/help/vitamins.svg"
+     "src": "../assets/images/help/vitamins.svg"
   },
   {
     "title": "Medicines",
-    "src": "./assets/images/help/medicines.svg"
+    "src": "../assets/images/help/medicines.svg"
   },
   {
     "title": "Collars / leashes",
-    "src": "./assets/images/help/collars-leashes.svg"
+    "src": "../assets/images/help/collars-leashes.svg"
   },
   {
     "title": "Sleeping areas",
-    "src": "./assets/images/help/sleeping-area.svg"
+    "src": "../assets/images/help/sleeping-area.svg"
   }
 ]

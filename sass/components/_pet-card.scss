@@ -1,0 +1,130 @@
+.our-friends__card {
+  position: fixed;
+  top: calc(50% - 300px);
+  width: 900px;
+  height: 500px;
+  display: flex;
+  gap: 30px;
+
+  border-radius: 9px;
+  background-color: $light-s__color;
+
+  @media screen and (max-width: $tablet-screen) {
+    width: 630px;
+    height: 350px;
+    gap: 11px;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    width: 240px;
+    padding: 10px;
+  }
+
+}
+
+.our-friends__card-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 351px;
+  padding: 50px 0 88px 0;
+  gap: 40px;
+
+  @media screen and (max-width: $tablet-screen) {
+    padding: 10px 0 37px 0;
+    max-width: 260px;
+    gap: 20px;
+  }
+}
+
+.our-friends__card-header {
+  margin-bottom: 10px;
+
+  @media screen and (max-width: $mobile-screen) {
+    text-align: center;
+  }
+
+}
+
+.our-friends__card-subheader {
+
+  @media screen and (max-width: $mobile-screen) {
+    text-align: center;
+  }
+
+}
+
+.our-friends__card-text {
+  color: $dark__color;
+  line-height: 16.5px;
+  letter-spacing: 0.9px;
+
+  @media screen and (max-width: $tablet-screen) {
+    text-align: justify;
+    font-size: 13px;
+    line-height: 14.3px;
+    letter-spacing: 0.78px;
+  }
+
+}
+
+.our-friends__card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 17px;
+  text-decoration-color: $primary__color;
+
+  @media screen and (max-width: $tablet-screen) {
+    gap: 5px;
+  }
+
+}
+
+.our-friends__card-item::marker {
+  color: $primary__color;
+}
+
+.our-friends__card-item {
+  font-size: 15px;
+  line-height: 16.5px;
+  letter-spacing: 0.9px;
+
+  & span {
+    font-weight: 700;
+  }
+
+}
+
+.our-friends__card .our-friends__slide-img {
+  width: auto;
+
+  @media screen and (max-width: $mobile-screen) {
+    display: none;
+  }
+}
+
+.our-friends__card-button {
+  display: block;
+  position: absolute;
+  right: -52px;
+  top: -52px;
+  width: 52px;
+  height: 52px;
+  border-radius: 100%;
+  border: 2px solid $primary__color;
+  background-image: url('../../assets/images/icons/close.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    background-color: $primary__color;
+    transition: 0.2s;
+  }
+
+  @media screen and (max-width: $mobile-screen) {
+    right: -30px;
+  }
+
+}
