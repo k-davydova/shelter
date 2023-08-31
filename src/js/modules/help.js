@@ -1,7 +1,11 @@
-const createHelpContent = (helpData) => {
+import { getResource } from './utils';
+
+const createHelpContent = async () => {
+  const data = await getResource('../assets/json/help.json');
+
   const parentElement = document.querySelector('.help__items');
 
-  helpData.forEach((item) => {
+  data.forEach((item) => {
     const { title, src } = item;
 
     const element = document.createElement('div');
@@ -20,5 +24,7 @@ const createHelpContent = (helpData) => {
   });
 
 };
+
+createHelpContent();
 
 export { createHelpContent };

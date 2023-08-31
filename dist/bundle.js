@@ -70,10 +70,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createHelpContent: () => (/* binding */ createHelpContent)
 /* harmony export */ });
-const createHelpContent = (helpData) => {
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/modules/utils.js");
+
+
+const createHelpContent = async () => {
+  const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../assets/json/help.json');
+
   const parentElement = document.querySelector('.help__items');
 
-  helpData.forEach((item) => {
+  data.forEach((item) => {
     const { title, src } = item;
 
     const element = document.createElement('div');
@@ -92,6 +97,8 @@ const createHelpContent = (helpData) => {
   });
 
 };
+
+createHelpContent();
 
 
 
@@ -113,15 +120,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const openPetsModal = (petsData) => {
+const openPetsModal = (petsData, parentSelector) => {
+  const parent = document.querySelector(parentSelector);
   const sliderCards = document.querySelectorAll('.our-friends__slide');
 
   petsData.forEach((data, index ) => {
     sliderCards.forEach((card, idx) => {
       card.addEventListener('click', () => {
         if (index === idx) {
-          const { title, type, description, src, attributes } = petsData[idx];
-          new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(title, type, description, src, '.our-friends__wrapper', attributes).createModalPetCards();
+          const { id, title, type, description, src, attributes } = petsData[idx];
+          new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(id, title, type, description, src, parent, attributes).createModalPetCards();
           closePetsModal();
           (0,_background__WEBPACK_IMPORTED_MODULE_0__.toggleBackground)();
         }
@@ -164,34 +172,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   PetCards: () => (/* binding */ PetCards)
 /* harmony export */ });
 class PetCards {
-  constructor(title, type, description, src, parentSelector, attributes) {
+  constructor(id, title, type, description, src, parent, attributes) {
+    this.id = id;
     this.title = title;
     this.type = type;
     this.description = description;
     this.src = src;
     this.attributes = attributes;
-    this.parent = document.querySelector(parentSelector);
+    this.parent = parent;
+  }
+
+  static injectCards() {
+    // console.log(this);
   }
 
   createSliderPetCards() {
     const slide = document.createElement('div');
-    slide.setAttribute('class', 'our-friends__slide');
+    slide.classList.add('our-friends__slide');
+    slide.setAttribute('id', `${this.id}`);
 
     const img = document.createElement('img');
-    img.setAttribute('class', 'our-friends__slide-img');
-    img.setAttribute('src', this.src);
-    img.setAttribute('alt', this.title);
+    img.classList.add('our-friends__slide-img');
+    img.src = this.src;
+    img.alt = this.title;
 
     const p = document.createElement('p');
-    p.setAttribute('class', 'our-friends__slide-text');
+    p.classList.add('our-friends__slide-text');
     p.textContent = this.title;
 
     const button = document.createElement('button');
-    button.setAttribute('class', 'our-friends__slide-button');
+    button.classList.add('our-friends__slide-button');
     button.textContent = 'Learn more';
 
     slide.append(img, p, button);
-    this.parent.append(slide);
+
+    return slide;
+
   }
 
   createModalPetCards() {
@@ -248,6 +264,179 @@ class PetCards {
 }
 
 
+
+/***/ }),
+
+/***/ "./src/js/modules/slider.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/slider.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   injectThreePages: () => (/* binding */ injectThreePages),
+/* harmony export */   moveSlider: () => (/* binding */ moveSlider)
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/modules/utils.js");
+/* harmony import */ var _petCards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./petCards */ "./src/js/modules/petCards.js");
+/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal */ "./src/js/modules/modal.js");
+
+
+
+
+const sliderNext = document.querySelector('.our-friends__slider-button_next');
+const sliderPrev = document.querySelector('.our-friends__slider-button_prev');
+
+let offset = 0;
+let currentCardIndex = 0;
+
+const injectThreePages = async ({ numberOfPages, parentSelector }) => {
+  const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../assets/json/pets.json');
+
+  const parent = document.querySelector(parentSelector);
+
+  const container = document.createElement('div');
+  container.classList.add('our-friends__slider-page');
+
+  if (!addAtBeginning) {
+
+    for (let i = 0; i < numberOfCards; i++) {
+      const currentIndex = (currentCardIndex + i) % data.length;
+      const { id, title, type, description, src } = data[currentIndex];
+      const card = new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(id, title, type, description, src);
+      const slide = card.createSliderPetCards();
+
+      container.append(slide);
+    }
+
+    parent.append(container);
+
+    currentCardIndex += numberOfCards;
+    // console.log(currentCardIndex);
+    deleteSlidePage();
+  }
+
+  parent.prepend(container);
+
+
+  const listOfPages = parent.childNodes;
+
+  (0,_modal__WEBPACK_IMPORTED_MODULE_2__.openPetsModal)(data, '.our-friends__wrapper');
+  // deleteSlidePage();
+};
+
+// const addSlidePage = async ({ addAtBeginning, numberOfCards, parentSelector }) => {
+//   const data = await getResource('../assets/json/pets.json');
+
+//   const parent = document.querySelector(parentSelector);
+
+//   const container = document.createElement('div');
+//   container.classList.add('our-friends__slider-page');
+
+//   if (!addAtBeginning) {
+//     // console.log(currentCardIndex);
+//     for (let i = 0; i < numberOfCards; i++) {
+//       const currentIndex = (currentCardIndex + i) % data.length;
+//       const { id, title, type, description, src } = data[currentIndex];
+//       const card = new PetCards(id, title, type, description, src);
+//       const slide = card.createSliderPetCards();
+
+//       container.append(slide);
+//     }
+
+//     parent.append(container);
+
+//     currentCardIndex += numberOfCards;
+//     // console.log(currentCardIndex);
+//     deleteSlidePage();
+//   } else {
+//     currentCardIndex -= 6;
+
+//     if (currentCardIndex < 0) {
+//       currentCardIndex += data.length;
+//     }
+
+//     for (let i = numberOfCards - 1; i >= 0; i--) {
+//       const currentIndex = (currentCardIndex + i) % data.length;
+//       const { id, title, type, description, src } = data[currentIndex];
+//       const card = new PetCards(id, title, type, description, src);
+//       const slide = card.createSliderPetCards();
+//       container.prepend(slide);
+//     }
+
+//     parent.prepend(container);
+
+//     currentCardIndex += numberOfCards;
+
+//   }
+
+//   const listOfPages = parent.childNodes;
+
+//   openPetsModal(data, '.our-friends__wrapper');
+//   // deleteSlidePage();
+
+// };
+
+const deleteSlidePage = () => {
+  // const listLength = listOfPages.length;
+  const nodeList = document.querySelectorAll('.our-friends__slider-page');
+  console.log(nodeList);
+
+  if (nodeList.length > 2) {
+    const firstElement = nodeList[0];
+    console.log('hehe');
+
+    firstElement.parentNode.removeChild(firstElement);
+  }
+
+};
+
+// deleteSlidePage();
+
+const moveSlider = (direction) => {
+  const page = document.querySelector('.our-friends__slider-page');
+  console.log(currentCardIndex);
+  const pageWidth = page.offsetWidth;
+
+  const sliderTrack = document.querySelector('.our-friends__slider-track');
+
+  const gapComputedStyle = window.getComputedStyle(sliderTrack);
+  const gapValue = +gapComputedStyle.getPropertyValue('gap').slice(0, -2);
+
+  if (direction === 'right') {
+    addSlidePage({ addAtBeginning: false, numberOfCards: 3, parentSelector: '.our-friends__slider-track' });
+
+    // offset -= pageWidth + gapValue;
+    // offset += 0;
+
+    // sliderTrack.style.transform = `translateX(${offset}px)`;
+  }
+
+  if (direction === 'left') {
+    addSlidePage({ addAtBeginning: true, numberOfCards: 3, parentSelector: '.our-friends__slider-track' });
+    // offset += sliderWrapper.offsetWidth + gapValue;
+    // offset += 0;
+    // sliderTrack.style.transform = `translateX(${offset}px)`;
+  }
+
+};
+
+sliderPrev.addEventListener('click', () => moveSlider('left'));
+sliderNext.addEventListener('click', () => moveSlider('right'));
+
+// export { moveSlider, addSlidePage, deleteSlidePage };
+
+
+// export function createSlider(
+//   containerId,
+
+// ) {
+
+// };
+
+
+// При нажатии на на кнопк будет....
 
 /***/ }),
 
@@ -335,12 +524,13 @@ var __webpack_exports__ = {};
   \**************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/utils */ "./src/js/modules/utils.js");
-/* harmony import */ var _modules_help__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/help */ "./src/js/modules/help.js");
-/* harmony import */ var _modules_petCards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/petCards */ "./src/js/modules/petCards.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
-/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
-/* harmony import */ var _modules_background__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/background */ "./src/js/modules/background.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_help__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/help */ "./src/js/modules/help.js");
+/* harmony import */ var _modules_petCards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/petCards */ "./src/js/modules/petCards.js");
+/* harmony import */ var _modules_background__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/background */ "./src/js/modules/background.js");
+/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
 
+// import { injectSliderPetCards } from './modules/slider';
 
 
 
@@ -349,17 +539,20 @@ __webpack_require__.r(__webpack_exports__);
 
 window.addEventListener('DOMContentLoaded', () => {
 
-  (0,_modules_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../assets/json/help.json')
-    .then((data) => (0,_modules_help__WEBPACK_IMPORTED_MODULE_1__.createHelpContent)(data));
+  // injectSliderPetCards({
+  //   initialNumberOfCards: 3,
+  //   parentSelector: '.our-friends__slider-track'
+  // });
 
-  (0,_modules_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../assets/json/pets.json')
-    .then(data => {
-      data.forEach(( {title, type, description, src} ) => {
-        new _modules_petCards__WEBPACK_IMPORTED_MODULE_2__.PetCards(title, type, description, src, '.our-friends__slider-track').createSliderPetCards();
-      });
+  // addSlidePage({
+  //   addAtBeginning: false,
+  //   numberOfCards: 3,
+  //   parentSelector: '.our-friends__slider-track'
+  // });
 
-      (0,_modules_modal__WEBPACK_IMPORTED_MODULE_3__.openPetsModal)(data);
-    });
+  (0,_modules_slider__WEBPACK_IMPORTED_MODULE_1__.injectThreePages)({numberOfPages: 3, parentSelector: '.our-friends__slider-track'});
+
+  // deleteSlidePage();
 
 });
 

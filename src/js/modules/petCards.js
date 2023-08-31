@@ -1,32 +1,40 @@
 class PetCards {
-  constructor(title, type, description, src, parentSelector, attributes) {
+  constructor(id, title, type, description, src, parent, attributes) {
+    this.id = id;
     this.title = title;
     this.type = type;
     this.description = description;
     this.src = src;
     this.attributes = attributes;
-    this.parent = document.querySelector(parentSelector);
+    this.parent = parent;
+  }
+
+  static injectCards() {
+    // console.log(this);
   }
 
   createSliderPetCards() {
     const slide = document.createElement('div');
-    slide.setAttribute('class', 'our-friends__slide');
+    slide.classList.add('our-friends__slide');
+    slide.setAttribute('id', `${this.id}`);
 
     const img = document.createElement('img');
-    img.setAttribute('class', 'our-friends__slide-img');
-    img.setAttribute('src', this.src);
-    img.setAttribute('alt', this.title);
+    img.classList.add('our-friends__slide-img');
+    img.src = this.src;
+    img.alt = this.title;
 
     const p = document.createElement('p');
-    p.setAttribute('class', 'our-friends__slide-text');
+    p.classList.add('our-friends__slide-text');
     p.textContent = this.title;
 
     const button = document.createElement('button');
-    button.setAttribute('class', 'our-friends__slide-button');
+    button.classList.add('our-friends__slide-button');
     button.textContent = 'Learn more';
 
     slide.append(img, p, button);
-    this.parent.append(slide);
+
+    return slide;
+
   }
 
   createModalPetCards() {

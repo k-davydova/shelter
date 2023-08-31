@@ -706,6 +706,7 @@ p {
   width: 100%;
 }
 .our-friends__slider_our-pets {
+  padding-bottom: 112px;
   flex-direction: column;
   gap: 60px;
 }
@@ -713,10 +714,16 @@ p {
   .our-friends__slider {
     padding: 0 64px 0 64px;
   }
+  .our-friends__slider_our-pets {
+    padding-bottom: 90px;
+  }
 }
 @media screen and (max-width: 767.98px) {
   .our-friends__slider {
     padding: 0 15px 0 15px;
+  }
+  .our-friends__slider_our-pets {
+    padding-bottom: 94px;
   }
 }
 
@@ -730,14 +737,40 @@ p {
   width: max-content;
   display: flex;
   gap: 90px;
-}
-.our-friends__slider-track_our-pets {
-  flex-wrap: wrap;
-  gap: 30px 40px;
+  right: 0;
+  transition: 0.8s;
 }
 @media screen and (max-width: 1199.98px) {
   .our-friends__slider-track {
     gap: 40px;
+  }
+}
+
+.our-friends__slider-page {
+  display: flex;
+  gap: 90px;
+  transition: opacity 0.5s ease-in-out;
+}
+@media screen and (max-width: 1199.98px) {
+  .our-friends__slider-page {
+    gap: 40px;
+  }
+}
+.our-friends__slider-page_our-pets {
+  width: 1200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px 40px;
+}
+@media screen and (max-width: 1199.98px) {
+  .our-friends__slider-page_our-pets {
+    width: 708px;
+  }
+}
+@media screen and (max-width: 767.98px) {
+  .our-friends__slider-page_our-pets {
+    width: 320px;
   }
 }
 
@@ -746,6 +779,7 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  padding-bottom: 30px;
   background-color: #FAFAFA;
   border-radius: 9px;
   transition: 0.2s;
@@ -774,7 +808,6 @@ p {
 
 .our-friends__slide-button {
   padding: 13px 43px;
-  margin-bottom: 30px;
   border-radius: 100px;
   border: 2px solid #F1CDB3;
   background-color: #FAFAFA;
@@ -785,15 +818,29 @@ p {
   cursor: pointer;
 }
 
-.our-friends__slider-button_our-pets {
+.our-friends__slider-buttons_our-pets {
+  position: absolute;
+  bottom: 0;
   display: flex;
+  justify-content: center;
   gap: 20px;
+  width: 340px;
+}
+.our-friends__slider-buttons_our-pets .our-friends__slider-button {
+  position: static;
+}
+@media screen and (max-width: 767.98px) {
+  .our-friends__slider-buttons_our-pets {
+    gap: 10px;
+  }
 }
 
 .our-friends__slider-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 52px;
   height: 52px;
-  position: absolute;
   border-radius: 100px;
   border: 2px solid #F1CDB3;
   background-color: #F6F6F6;
@@ -811,6 +858,7 @@ p {
   transition: 0.4s;
 }
 .our-friends__slider-button_prev {
+  position: absolute;
   left: 0;
 }
 @media screen and (max-width: 767.98px) {
@@ -820,6 +868,7 @@ p {
   }
 }
 .our-friends__slider-button_next {
+  position: absolute;
   right: 0;
 }
 @media screen and (max-width: 767.98px) {
