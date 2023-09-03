@@ -15,26 +15,29 @@ class PetCards {
 
   createSliderPetCards() {
     const slide = document.createElement('div');
+
     slide.classList.add('our-friends__slide');
     slide.setAttribute('id', `${this.id}`);
 
     const img = document.createElement('img');
+
     img.classList.add('our-friends__slide-img');
     img.src = this.src;
     img.alt = this.title;
 
     const p = document.createElement('p');
+
     p.classList.add('our-friends__slide-text');
     p.textContent = this.title;
 
     const button = document.createElement('button');
+
     button.classList.add('our-friends__slide-button');
     button.textContent = 'Learn more';
 
     slide.append(img, p, button);
 
     return slide;
-
   }
 
   createModalPetCards() {
@@ -68,7 +71,7 @@ class PetCards {
     const ul = document.createElement('ul');
     ul.setAttribute('class', 'our-friends__card-list');
 
-    for (const [ attribute, value ] of Object.entries(this.attributes)) {
+    Object.entries(this.attributes).forEach(([attribute, value]) => {
       const li = document.createElement('li');
       li.setAttribute('class', 'our-friends__card-item');
 
@@ -77,7 +80,18 @@ class PetCards {
 
       li.append(span, value);
       ul.append(li);
-    }
+    });
+
+    // for (const [ attribute, value ] of Object.entries(this.attributes)) {
+    //   const li = document.createElement('li');
+    //   li.setAttribute('class', 'our-friends__card-item');
+
+    //   const span = document.createElement('span');
+    //   span.textContent = `${attribute}: `;
+
+    //   li.append(span, value);
+    //   ul.append(li);
+    // }
 
     const closeButton = document.createElement('span');
     closeButton.setAttribute('class', 'our-friends__card-button');

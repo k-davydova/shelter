@@ -10,6 +10,7 @@ const openPetsModal = (petsData, parentSelector) => {
       card.addEventListener('click', () => {
         if (index === idx) {
           const { id, title, type, description, src, attributes } = petsData[idx];
+
           new PetCards(id, title, type, description, src, parent, attributes).createModalPetCards();
           closePetsModal();
           toggleBackground();

@@ -70,6 +70,7 @@
 }
 
 .our-friends__slider-wrapper {
+  display: flex;
   position: relative;
   overflow: hidden;
 }
@@ -123,6 +124,8 @@
   align-items: center;
   gap: 30px;
   padding-bottom: 30px;
+  width: 270px;
+  height: 435px;
 
   background-color: $light-s__color;
   border-radius: 9px;

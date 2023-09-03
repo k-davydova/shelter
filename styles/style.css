@@ -728,6 +728,7 @@ p {
 }
 
 .our-friends__slider-wrapper {
+  display: flex;
   position: relative;
   overflow: hidden;
 }
@@ -780,6 +781,8 @@ p {
   align-items: center;
   gap: 30px;
   padding-bottom: 30px;
+  width: 270px;
+  height: 435px;
   background-color: #FAFAFA;
   border-radius: 9px;
   transition: 0.2s;
