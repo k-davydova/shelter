@@ -1,5 +1,5 @@
 import { getResource } from './modules/utils';
-import { addSlidePage, moveSlider } from './modules/slider';
+import { addSlidePage, moveSlider, deleteSlidePage } from './modules/slider';
 import { createHelpContent } from './modules/help';
 import { PetCards } from './modules/petCards';
 import { toggleBackground } from './modules/background';

@@ -303,15 +303,13 @@ __webpack_require__.r(__webpack_exports__);
 const sliderNext = document.querySelector('.our-friends__slider-button_next');
 const sliderPrev = document.querySelector('.our-friends__slider-button_prev');
 
-let offset = 0;
 let currentCardIndex = 0;
 
 const addSlidePage = async ({ addAtBeginning, numberOfCards, parentSelector }) => {
   const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../assets/json/pets.json');
-
   const parent = document.querySelector(parentSelector);
-
   const container = document.createElement('div');
+
   container.classList.add('our-friends__slider-page');
 
   if (!addAtBeginning) {
@@ -339,6 +337,7 @@ const addSlidePage = async ({ addAtBeginning, numberOfCards, parentSelector }) =
       const { id, title, type, description, src } = data[currentIndex];
       const card = new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(id, title, type, description, src);
       const slide = card.createSliderPetCards();
+
       container.prepend(slide);
     }
 
@@ -350,12 +349,11 @@ const addSlidePage = async ({ addAtBeginning, numberOfCards, parentSelector }) =
 
   const listOfPages = parent.childNodes;
 
+  // deleteSlidePage();
   (0,_modal__WEBPACK_IMPORTED_MODULE_2__.openPetsModal)(data, '.our-friends__wrapper');
-
 };
 
 // const deleteSlidePage = () => {
-//   // const listLength = listOfPages.length;
 //   const nodeList = document.querySelectorAll('.our-friends__slider-page');
 //   console.log(nodeList);
 
@@ -363,49 +361,51 @@ const addSlidePage = async ({ addAtBeginning, numberOfCards, parentSelector }) =
 //     const firstElement = nodeList[0];
 //     console.log('hehe');
 
-//     firstElement.parentNode.removeChild(firstElement);
+//     // firstElement.parentNode.removeChild(firstElement);
 //   }
 
 // };
 
-// deleteSlidePage();
-
 const moveSlider = (direction) => {
-  const wrapper = document.querySelector('.our-friends__slider-wrapper');
-  const page = document.querySelector('.our-friends__slider-page');
-  const pageWidth = page.offsetWidth;
   const sliderTrack = document.querySelector('.our-friends__slider-track');
+  const page = document.querySelector('.our-friends__slider-page');
+
+  const pageWidth = page.offsetWidth;
   const gapComputedStyle = window.getComputedStyle(sliderTrack);
   const gapValue = +gapComputedStyle.getPropertyValue('gap').slice(0, -2);
 
-  // console.log(currentCardIndex);
+  let offset = parseInt(sliderTrack.style.transform.replace('translateX(', '').replace('px)', '')) || 0;
 
   if (direction === 'right') {
-    // wrapper.style.justifyContent = 'flex-start';
-
     if (-offset === sliderTrack.offsetWidth + gapValue - pageWidth - gapValue) {
-      addSlidePage({ addAtBeginning: false, numberOfCards: 3, parentSelector: '.our-friends__slider-track' });
+      addSlidePage({
+        addAtBeginning: false,
+        numberOfCards: 3,
+        parentSelector: '.our-friends__slider-track'
+      });
     }
 
     offset -= pageWidth + gapValue;
-
-    sliderTrack.style.transform = `translateX(${offset}px)`;
-    console.log(offset);
   }
 
   if (direction === 'left') {
-    // wrapper.style.justifyContent = 'flex-end';
-    offset = 0 - offset;
-    // addSlidePage({ addAtBeginning: true, numberOfCards: 3, parentSelector: '.our-friends__slider-track' });
-    // offset += pageWidth + gapValue;
-    // addSlidePage({ addAtBeginning: true, numberOfCards: 3, parentSelector: '.our-friends__slider-track' });
-    console.log(offset);
-    console.log(sliderTrack.offsetWidth + gapValue - pageWidth - gapValue);
+    if (offset >= 0) {
+      addSlidePage({
+        addAtBeginning: true,
+        numberOfCards: 3,
+        parentSelector: '.our-friends__slider-track'
+      });
+    }
 
-    // addSlidePage({ addAtBeginning: true, numberOfCards: 3, parentSelector: '.our-friends__slider-track' });
-    // offset += pageWidth + gapValue;
-    sliderTrack.style.transform = `translateX(${offset}px)`;
+    offset += pageWidth + gapValue;
   }
+
+  sliderTrack.style.transition = 'transform 0.8s ease-in-out';
+  sliderTrack.style.transform = `translateX(${offset}px)`;
+
+  setTimeout(() => {
+    sliderTrack.style.transition = '';
+  }, 800);
 
 };
 
