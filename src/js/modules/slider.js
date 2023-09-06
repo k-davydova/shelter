@@ -68,58 +68,58 @@ const addSlidePage = async ({ addAtBeginning, numberOfCards, parentSelector }) =
 
 // };
 
-const moveSlider = (direction) => {
-  const sliderTrack = document.querySelector('.our-friends__slider-track');
-  const page = document.querySelector('.our-friends__slider-page');
+// const moveSlider = (direction) => {
+//   const sliderTrack = document.querySelector('.our-friends__slider-track');
+//   const page = document.querySelector('.our-friends__slider-page');
 
-  const pageWidth = page.offsetWidth;
-  const gapComputedStyle = window.getComputedStyle(sliderTrack);
-  const gapValue = +gapComputedStyle.getPropertyValue('gap').slice(0, -2);
+//   const pageWidth = page.offsetWidth;
+//   const gapComputedStyle = window.getComputedStyle(sliderTrack);
+//   const gapValue = +gapComputedStyle.getPropertyValue('gap').slice(0, -2);
 
-  let offset = parseInt(sliderTrack.style.transform.replace('translateX(', '').replace('px)', '')) || 0;
+//   let offset = parseInt(sliderTrack.style.transform.replace('translateX(', '').replace('px)', '')) || 0;
 
-  if (direction === 'right') {
-    if (-offset === sliderTrack.offsetWidth + gapValue - pageWidth - gapValue) {
-      addSlidePage({
-        addAtBeginning: false,
-        numberOfCards: 3,
-        parentSelector: '.our-friends__slider-track'
-      });
-    }
+//   if (direction === 'right') {
+//     if (-offset === sliderTrack.offsetWidth + gapValue - pageWidth - gapValue) {
+//       addSlidePage({
+//         addAtBeginning: false,
+//         numberOfCards: 3,
+//         parentSelector: '.our-friends__slider-track'
+//       });
+//     }
 
-    offset -= pageWidth + gapValue;
-  }
+//     offset -= pageWidth + gapValue;
+//   }
 
-  if (direction === 'left') {
-    console.log(offset); //
-    if (offset >= 0) {
-      console.log(offset);
-      addSlidePage({
-        addAtBeginning: true,
-        numberOfCards: 3,
-        parentSelector: '.our-friends__slider-track'
-      });
+//   if (direction === 'left') {
+//     console.log(offset); //
+//     if (offset >= 0) {
+//       console.log(offset);
+//       addSlidePage({
+//         addAtBeginning: true,
+//         numberOfCards: 3,
+//         parentSelector: '.our-friends__slider-track'
+//       });
 
-      sliderTrack.style.transform = `translateX(${offset}px)`;
-    }
+//       sliderTrack.style.transform = `translateX(${offset}px)`;
+//     }
 
-    // offset += pageWidth + gapValue;
-  }
+//     // offset += pageWidth + gapValue;
+//   }
 
-  // sliderTrack.addEventListener('transitionend', () => {
-  // затестить эту штуку
-  // });
+//   // sliderTrack.addEventListener('transitionend', () => {
+//   // затестить эту штуку
+//   // });
 
-  sliderTrack.style.transition = 'transform 0.8s ease-in-out';
-  sliderTrack.style.transform = `translateX(${offset}px)`;
+//   sliderTrack.style.transition = 'transform 0.8s ease-in-out';
+//   sliderTrack.style.transform = `translateX(${offset}px)`;
 
-  setTimeout(() => {
-    sliderTrack.style.transition = '';
-  }, 800);
+//   setTimeout(() => {
+//     sliderTrack.style.transition = '';
+//   }, 800);
 
-};
+// };
 
-sliderPrev.addEventListener('click', () => moveSlider('left'));
-sliderNext.addEventListener('click', () => moveSlider('right'));
+// sliderPrev.addEventListener('click', () => moveSlider('left'));
+// sliderNext.addEventListener('click', () => moveSlider('right'));
 
-export { addSlidePage, moveSlider };
+// export { addSlidePage, moveSlider };

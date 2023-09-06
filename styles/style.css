@@ -704,6 +704,7 @@ p {
   align-items: center;
   gap: 53px;
   width: 100%;
+  height: 100%;
 }
 .our-friends__slider_our-pets {
   padding-bottom: 112px;
@@ -730,45 +731,23 @@ p {
 .our-friends__slider-wrapper {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .our-friends__slider-track {
-  position: relative;
-  width: max-content;
   display: flex;
   gap: 90px;
-  right: 0;
+  width: fit-content;
+  height: 100%;
+  flex-shrink: 0;
+  transition: all 0.5s;
 }
 @media screen and (max-width: 1199.98px) {
   .our-friends__slider-track {
     gap: 40px;
-  }
-}
-
-.our-friends__slider-page {
-  display: flex;
-  gap: 90px;
-}
-@media screen and (max-width: 1199.98px) {
-  .our-friends__slider-page {
-    gap: 40px;
-  }
-}
-.our-friends__slider-page_our-pets {
-  width: 1200px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px 40px;
-}
-@media screen and (max-width: 1199.98px) {
-  .our-friends__slider-page_our-pets {
-    width: 708px;
-  }
-}
-@media screen and (max-width: 767.98px) {
-  .our-friends__slider-page_our-pets {
-    width: 320px;
   }
 }
 
@@ -784,15 +763,6 @@ p {
   border-radius: 9px;
   transition: 0.2s;
   cursor: pointer;
-}
-.our-friends__slide:hover {
-  background-color: #FFFFFF;
-  transition: 0.4s;
-}
-.our-friends__slide:hover .our-friends__slide-button {
-  background-color: #FDDCC4;
-  border: 2px solid #FDDCC4;
-  transition: 0.4s;
 }
 
 .our-friends__slide-img {
