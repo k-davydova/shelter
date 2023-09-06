@@ -389,16 +389,24 @@ const moveSlider = (direction) => {
   }
 
   if (direction === 'left') {
+    console.log(offset); //
     if (offset >= 0) {
+      console.log(offset);
       addSlidePage({
         addAtBeginning: true,
         numberOfCards: 3,
         parentSelector: '.our-friends__slider-track'
       });
+
+      sliderTrack.style.transform = `translateX(${offset}px)`;
     }
 
-    offset += pageWidth + gapValue;
+    // offset += pageWidth + gapValue;
   }
+
+  // sliderTrack.addEventListener('transitionend', () => {
+  // затестить эту штуку
+  // });
 
   sliderTrack.style.transition = 'transform 0.8s ease-in-out';
   sliderTrack.style.transform = `translateX(${offset}px)`;

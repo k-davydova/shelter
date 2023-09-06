@@ -81,7 +81,7 @@
   display: flex;
   gap: 90px;
   right: 0;
-  transition: 0.8s;
+  // transition: 0.8s;
 
   @media screen and (max-width: $tablet-screen) {
     gap: 40px;
@@ -92,7 +92,7 @@
 .our-friends__slider-page {
   display: flex;
   gap: 90px;
-  transition: opacity 0.5s ease-in-out;
+  // transition: opacity 0.5s ease-in-out;
 
   @media screen and (max-width: $tablet-screen) {
     gap: 40px;
