@@ -8,6 +8,11 @@
     margin-right: 42px;
     transition: 0.4s;
 
+    height: 22px;
+    padding-top: 10px;
+
+    cursor: pointer;
+
     &._active {
       transform: rotate(90deg);
       transition: 0.4s;
