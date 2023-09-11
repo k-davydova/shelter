@@ -21,95 +21,6 @@ const toggleBackground = () => {
 
 /***/ }),
 
-/***/ "./src/js/modules/burger.js":
-/*!**********************************!*\
-  !*** ./src/js/modules/burger.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   toggleBurgerNavigation: () => (/* binding */ toggleBurgerNavigation)
-/* harmony export */ });
-/* harmony import */ var _background__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./background */ "./src/js/modules/background.js");
-
-
-const burgerIcon = document.querySelector('.burger-menu');
-
-const toggleBurgerNavigation = () => {
-  const navigation = document.querySelector('.navigation');
-  const background = document.querySelector('.background');
-  const navigationItems = document.querySelectorAll('.navigation__item');
-
-  burgerIcon.classList.toggle('_active');
-  navigation.classList.toggle('_active');
-  (0,_background__WEBPACK_IMPORTED_MODULE_0__.toggleBackground)();
-
-  const closeFunction = () => {
-    if (background.classList.contains('_active')) {
-      (0,_background__WEBPACK_IMPORTED_MODULE_0__.toggleBackground)();
-    }
-  };
-
-  navigationItems.forEach(item => {
-    item.addEventListener('click', toggleBurgerNavigation);
-  });
-
-  background.addEventListener('click', closeFunction);
-
-};
-
-burgerIcon.addEventListener('click', toggleBurgerNavigation);
-
-
-
-
-/***/ }),
-
-/***/ "./src/js/modules/help.js":
-/*!********************************!*\
-  !*** ./src/js/modules/help.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createHelpContent: () => (/* binding */ createHelpContent)
-/* harmony export */ });
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/modules/utils.js");
-
-
-const createHelpContent = async () => {
-  const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../assets/json/help.json');
-
-  const parentElement = document.querySelector('.help__items');
-
-  data.forEach((item) => {
-    const { title, src } = item;
-
-    const element = document.createElement('div');
-    element.setAttribute('class', 'help__item');
-
-    const span = document.createElement('span');
-    span.setAttribute('class', 'help__icon');
-    span.style.backgroundImage = `url(${src})`;
-
-    const p = document.createElement('p');
-    p.setAttribute('class', 'help__text');
-    p.textContent = title;
-
-    element.append(span, p);
-    parentElement.append(element);
-  });
-
-};
-
-createHelpContent();
-
-
-
-/***/ }),
-
 /***/ "./src/js/modules/modal.js":
 /*!*********************************!*\
   !*** ./src/js/modules/modal.js ***!
@@ -293,42 +204,154 @@ __webpack_require__.r(__webpack_exports__);
 
 const sliderPrev = document.querySelector('.our-friends__slider-button_prev');
 const sliderNext = document.querySelector('.our-friends__slider-button_next');
+const sliderStart = document.querySelector('.our-friends__slider-button_start');
+const sliderEnd = document.querySelector('.our-friends__slider-button_end');
+const sliderIndicator = document.querySelector('.our-friends__slider-indicator');
 const sliderTrack = document.querySelector('.our-friends__slider-track');
 
-let flex;
-
+let flex = -1;
 let isAnimating = false;
+// let pageCounter = 1;
 
-const getNumberOfCards = () => {
-  const screenWidth = window.innerWidth;
-  let numberOfCards;
+// const changeNumberOfPage = (pageCounter) => {
+//   const sliderIndicator = document.querySelector('.our-friends__slider-indicator');
+//   const numberOfPages = 8;
 
-  if (screenWidth >= 1280) {
-    numberOfCards = 3;
-  } else if (screenWidth >= 768) {
-    numberOfCards = 2;
-  } else {
-    numberOfCards = 1;
+//   if (sliderIndicator) {
+//     if (pageCounter <= numberOfPages) {
+//       sliderIndicator.innerText = pageCounter;
+//       sliderEnd.disabled = false;
+//       sliderNext.disabled = false;
+//     }
+
+//     if (pageCounter <= 1) {
+//       sliderPrev.disabled = true;
+//       sliderStart.disabled = true;
+//     } else {
+//       sliderStart.disabled = false;
+//       sliderPrev.disabled = false;
+//     }
+
+//     if (pageCounter === numberOfPages) {
+//       sliderEnd.disabled = true;
+//       sliderNext.disabled = true;
+//     }
+//   }
+
+// };
+
+const generateArrayOfRandomNumbers = (length, min, max) => {
+  const arrayOfRandomNumbers = [];
+
+  for (let i = 0; arrayOfRandomNumbers.length < length; i++) {
+    const randomNumber = Math.floor(Math.random() * (max - min)) + min;
+
+    if (!arrayOfRandomNumbers.includes(randomNumber)) {
+      arrayOfRandomNumbers.push(randomNumber);
+    }
   }
 
-  return numberOfCards;
+  return arrayOfRandomNumbers;
 };
-window.addEventListener('resize', getNumberOfCards);
 
-const addSlideCards = async ({ parentSelector }) => {
-  const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../assets/json/pets.json');
+const getNumberOfCards = () => {
+  const page = document.querySelector('.our-friends__slider-page_our-pets');
+  const screenWidth = window.innerWidth;
+
+  if (page) return 1;
+
+  if (screenWidth >= 1280) {
+    return 3;
+  } else if (screenWidth >= 768) {
+    return 2;
+  } else {
+    return 1;
+  }
+
+};
+
+// let numberOfCards = getNumberOfCards();
+
+const addSlideCards = async ({ parentSelector, numberOfPages }) => {
+  const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../../../assets/json/pets.json');
   const parent = document.querySelector(parentSelector);
 
-  data.forEach((data) => {
-    const { id, title, type, description, src } = data;
-    const slide = new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(id, title, type, description, src).createSliderPetCards();
+  const addSlideCardsToParent = (parent, order) => {
+    order.forEach((index) => {
+      const { id, title, type, description, src } = data[index];
+      const slide = new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(id, title, type, description, src).createSliderPetCards();
 
-    parent.appendChild(slide);
-  });
+      parent.appendChild(slide);
+    });
+  };
+
+  if (numberOfPages) {
+    for (let i = 0; i < numberOfPages; i++) {
+      const page = document.createElement('div');
+
+      page.classList.add('our-friends__slider-page_our-pets');
+      page.setAttribute('data-number', `${i + 1}`);
+
+      const randomOrder = generateArrayOfRandomNumbers(8, 0, 8);
+
+      addSlideCardsToParent(page, randomOrder);
+
+      parent.appendChild(page);
+    }
+  } else {
+    const arrayOfData = [];
+
+    for (let i = 0; i < data.length; i++) {
+      arrayOfData.push(i);
+    }
+
+    addSlideCardsToParent(parent, arrayOfData);
+  }
 
   (0,_modal__WEBPACK_IMPORTED_MODULE_2__.openPetsModal)(data, '.our-friends__wrapper');
-
 };
+
+// const moveSlider = ({ direction }) => {
+
+//   console.log(direction);
+//   if (isAnimating) return;
+
+//   isAnimating = true;
+
+//   const numberOfCards = getNumberOfCards();
+//   console.log(numberOfCards);
+
+//   const wrapper = document.querySelector('.our-friends__slider-wrapper');
+//   const wrapperWidth = wrapper.offsetWidth;
+
+//   const gapComputedStyle = window.getComputedStyle(sliderTrack);
+//   const gapValue = +gapComputedStyle.getPropertyValue('gap').slice(0, -2);
+
+//   const offset = wrapperWidth + gapValue;
+
+//   if (direction === 'next') {
+//     // pageCounter += 1;
+//     flex = -1;
+//     wrapper.style.justifyContent = 'flex-start';
+//     sliderTrack.style.transform = `translateX(${-offset}px)`;
+//   }
+
+//   if (direction === 'prev') {
+//     if (flex === -1) {
+//       for (let i = 0; i < numberOfCards; i++) {
+//         sliderTrack.appendChild(sliderTrack.firstElementChild);
+//       }
+//       flex = 1;
+//     }
+
+//     wrapper.style.justifyContent = 'flex-end';
+//     sliderTrack.style.transform = `translateX(${offset}px)`;
+
+//     // pageCounter -= 1;
+//   }
+
+//   // changeNumberOfPage(pageCounter);
+// };
 
 const moveSlider = ({ direction }) => {
   if (isAnimating) return;
@@ -336,6 +359,7 @@ const moveSlider = ({ direction }) => {
   isAnimating = true;
 
   const numberOfCards = getNumberOfCards();
+  console.log(numberOfCards);
 
   const wrapper = document.querySelector('.our-friends__slider-wrapper');
   const wrapperWidth = wrapper.offsetWidth;
@@ -346,9 +370,17 @@ const moveSlider = ({ direction }) => {
   const offset = wrapperWidth + gapValue;
 
   if (direction === 'next') {
-    flex = -1;
+    if (flex === 1) {
+      for (let i = 0; i < numberOfCards; i++) {
+        console.log(i);
+        sliderTrack.prepend(sliderTrack.lastElementChild);
+      }
+      flex = -1;
+    }
+
     wrapper.style.justifyContent = 'flex-start';
     sliderTrack.style.transform = `translateX(${-offset}px)`;
+
   }
 
   if (direction === 'prev') {
@@ -356,6 +388,7 @@ const moveSlider = ({ direction }) => {
       for (let i = 0; i < numberOfCards; i++) {
         sliderTrack.appendChild(sliderTrack.firstElementChild);
       }
+
       flex = 1;
     }
 
@@ -367,6 +400,8 @@ const moveSlider = ({ direction }) => {
 
 sliderTrack.addEventListener('transitionend', () => {
   const numberOfCards = getNumberOfCards();
+
+  // console.log(numberOfCards);
 
   if (flex === -1) {
     for (let i = 0; i < numberOfCards; i++) {
@@ -388,8 +423,42 @@ sliderTrack.addEventListener('transitionend', () => {
 
 });
 
-sliderPrev.addEventListener('click', () => moveSlider({ direction: 'prev' }));
+// window.addEventListener('resize', getNumberOfCards);
+
+window.addEventListener('resize', () => {
+  const numberOfCards = getNumberOfCards();
+  console.log(numberOfCards);
+});
+
+sliderPrev.addEventListener('click', () => {
+  moveSlider({ direction: 'prev' });
+});
+
 sliderNext.addEventListener('click', () => moveSlider({ direction: 'next' }));
+// sliderEnd.addEventListener('click', () => moveSlider({ direction: 'next' }));
+// sliderStart.addEventListener('click', () => moveSlider({ direction: 'next' }));
+
+// sliderPrev.addEventListener('click', () => {
+//   numberOfCards = getNumberOfCards();
+//   moveSlider({ direction: 'prev' });
+//   changeNumberOfPage();
+//   console.log(numberOfCards);
+// });
+
+// sliderNext.addEventListener('click', () => {
+//   numberOfCards = getNumberOfCards();
+//   moveSlider({ direction: 'next' });
+//   changeNumberOfPage();
+//   console.log(numberOfCards);
+// });
+
+// sliderEnd.addEventListener('click', () => {
+//   numberOfCards = getNumberOfCards(7);
+//   moveSlider({ direction: 'next' });
+//   changeNumberOfPage(numberOfCards + 1);
+//   console.log(numberOfCards);
+// });
+
 
 
 
@@ -474,34 +543,24 @@ const getResource = async (src) => {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!**************************!*\
-  !*** ./src/js/script.js ***!
-  \**************************/
+/*!**************************************!*\
+  !*** ./src/pages/our-pets/script.js ***!
+  \**************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/utils */ "./src/js/modules/utils.js");
-/* harmony import */ var _modules_help__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/help */ "./src/js/modules/help.js");
-/* harmony import */ var _modules_petCards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/petCards */ "./src/js/modules/petCards.js");
-/* harmony import */ var _modules_background__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/background */ "./src/js/modules/background.js");
-/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
-/* harmony import */ var _modules_slider_test__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/slider-test */ "./src/js/modules/slider-test.js");
-
-
-
-
-
-
+/* harmony import */ var _js_modules_slider_test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../js/modules/slider-test */ "./src/js/modules/slider-test.js");
 
 
 window.addEventListener('DOMContentLoaded', () => {
 
-  (0,_modules_slider_test__WEBPACK_IMPORTED_MODULE_5__.addSlideCards)({
-    parentSelector: '.our-friends__slider-track'
+  (0,_js_modules_slider_test__WEBPACK_IMPORTED_MODULE_0__.addSlideCards)({
+    parentSelector: '.our-friends__slider-track',
+    numberOfPages: 8
   });
 
-});
 
+});
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=page2.js.map

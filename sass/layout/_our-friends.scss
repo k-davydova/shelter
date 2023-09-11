@@ -78,6 +78,22 @@
   height: 100%;
   display: flex;
   justify-content: flex-start;
+
+  &_our-pets {
+    width: 1200px;
+
+    @media screen and (max-width: $tablet-screen) {
+      width: 100%;
+
+    }
+
+    @media screen and (max-width: $mobile-screen) {
+      ;
+
+    }
+
+  }
+
 }
 
 .our-friends__slider-track {
@@ -120,6 +136,27 @@
 //   }
 
 // }
+
+.our-friends__slider-page {
+
+  &_our-pets {
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px 40px;
+
+    @media screen and (max-width: $tablet-screen) {
+      width: 708px;
+    }
+
+    @media screen and (max-width: $mobile-screen) {
+      width: 320px;
+    }
+
+  }
+
+}
 
 .our-friends__slide {
   display: flex;
@@ -217,6 +254,12 @@
     background-color: $primary-light__color;
     border: 2px solid $primary-light__color;
     transition: 0.4s;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: $light-l__color;
+    border: 2px solid $dark-s__color;
   }
 
   &_prev {

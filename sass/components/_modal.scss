@@ -6,7 +6,7 @@
   display: flex;
   gap: 30px;
 
-  border-radius: 9px;
+  border-radius: 18px;
   background-color: $light-s__color;
 
   @media screen and (max-width: $tablet-screen) {
@@ -97,6 +97,7 @@
 
 .our-friends__card .our-friends__slide-img {
   width: auto;
+  border-radius: 12px;
 
   @media screen and (max-width: $mobile-screen) {
     display: none;

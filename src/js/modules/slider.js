@@ -8,7 +8,7 @@ const sliderPrev = document.querySelector('.our-friends__slider-button_prev');
 let currentCardIndex = 0;
 
 const addSlidePage = async ({ addAtBeginning, numberOfCards, parentSelector }) => {
-  const data = await getResource('../assets/json/pets.json');
+  const data = await getResource('../../../assets/json/pets.json');
   const parent = document.querySelector(parentSelector);
   const container = document.createElement('div');
 
