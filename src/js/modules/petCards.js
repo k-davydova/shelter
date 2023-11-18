@@ -9,31 +9,25 @@ class PetCards {
     this.parent = parent;
   }
 
-  static injectCards() {
-    // console.log(this);
-  }
-
   createSliderPetCards() {
     const slide = document.createElement('div');
+    const img = document.createElement('img');
+    const p = document.createElement('p');
+    const button = document.createElement('button');
 
     slide.classList.add('our-friends__slide');
-    slide.setAttribute('id', `${this.id}`);
-
-    const img = document.createElement('img');
+    slide.id = this.id;
 
     img.classList.add('our-friends__slide-img');
     img.src = this.src;
     img.alt = this.title;
 
-    const p = document.createElement('p');
-
     p.classList.add('our-friends__slide-text');
     p.textContent = this.title;
 
-    const button = document.createElement('button');
-
     button.classList.add('our-friends__slide-button');
     button.textContent = 'Learn more';
+
 
     slide.append(img, p, button);
 
@@ -42,59 +36,51 @@ class PetCards {
 
   createModalPetCards() {
     const modal = document.createElement('div');
-    modal.setAttribute('class', 'our-friends__card');
-    modal.style.zIndex = '5';
-
     const img = document.createElement('img');
-    img.setAttribute('class', 'our-friends__slide-img');
-    img.setAttribute('src', this.src);
-    img.setAttribute('alt', this.title);
-
     const content = document.createElement('div');
-    content.setAttribute('class', 'our-friends__card-content');
-
     const titleWrapper = document.createElement('div');
-    titleWrapper.setAttribute('class', 'our-friends__card-title');
-
     const header = document.createElement('h3');
-    header.setAttribute('class', 'our-friends__card-header');
+    const subheader = document.createElement('h4');
+    const descr = document.createElement('p');
+    const ul = document.createElement('ul');
+    const closeButton = document.createElement('span');
+
+    modal.classList.add('our-friends__card');
+    modal.style.zIndex = '5';
+    modal.classList.add('fade-in-animation');
+
+    img.classList.add('our-friends__slide-img');
+    img.src = this.src;
+    img.alt = this.title;
+
+    content.classList.add('our-friends__card-content');
+
+    titleWrapper.classList.add('our-friends__card-title');
+
+    header.classList.add('our-friends__card-header');
     header.textContent = this.title;
 
-    const subheader = document.createElement('h4');
-    subheader.setAttribute('class', 'our-friends__card-subheader');
+    subheader.classList.add('our-friends__card-subheader');
     subheader.textContent = this.type;
 
-    const descr = document.createElement('p');
-    descr.setAttribute('class', 'our-friends__card-text');
+    descr.classList.add('our-friends__card-text');
     descr.textContent = this.description;
 
-    const ul = document.createElement('ul');
-    ul.setAttribute('class', 'our-friends__card-list');
+    ul.classList.add('our-friends__card-list');
 
-    Object.entries(this.attributes).forEach(([attribute, value]) => {
+    closeButton.classList.add('our-friends__card-button');
+
+    Object.entries(this.attributes).forEach(([ attribute, value ]) => {
       const li = document.createElement('li');
-      li.setAttribute('class', 'our-friends__card-item');
-
       const span = document.createElement('span');
+
+      li.classList.add('our-friends__card-item');
+
       span.textContent = `${attribute}: `;
 
       li.append(span, value);
       ul.append(li);
     });
-
-    // for (const [ attribute, value ] of Object.entries(this.attributes)) {
-    //   const li = document.createElement('li');
-    //   li.setAttribute('class', 'our-friends__card-item');
-
-    //   const span = document.createElement('span');
-    //   span.textContent = `${attribute}: `;
-
-    //   li.append(span, value);
-    //   ul.append(li);
-    // }
-
-    const closeButton = document.createElement('span');
-    closeButton.setAttribute('class', 'our-friends__card-button');
 
     titleWrapper.append(header, subheader);
     content.append(titleWrapper, descr, ul);

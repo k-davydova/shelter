@@ -1,7 +1,7 @@
 import { getResource } from './utils';
 
 const createHelpContent = async () => {
-  const data = await getResource('../assets/json/help.json');
+  const data = await getResource('../../../assets/json/help.json');
 
   const parentElement = document.querySelector('.help__items');
 

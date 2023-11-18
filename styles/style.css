@@ -704,6 +704,7 @@ p {
   align-items: center;
   gap: 53px;
   width: 100%;
+  height: 100%;
 }
 .our-friends__slider_our-pets {
   padding-bottom: 112px;
@@ -730,14 +731,26 @@ p {
 .our-friends__slider-wrapper {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
 }
-
+.our-friends__slider-wrapper_our-pets {
+  width: 1200px;
+}
+@media screen and (max-width: 1199.98px) {
+  .our-friends__slider-wrapper_our-pets {
+    width: 100%;
+  }
+}
 .our-friends__slider-track {
-  position: relative;
-  width: max-content;
   display: flex;
   gap: 90px;
-  right: 0;
+  width: fit-content;
+  height: 100%;
+  flex-shrink: 0;
+  transition: all 0.5s;
 }
 @media screen and (max-width: 1199.98px) {
   .our-friends__slider-track {
@@ -745,15 +758,6 @@ p {
   }
 }
 
-.our-friends__slider-page {
-  display: flex;
-  gap: 90px;
-}
-@media screen and (max-width: 1199.98px) {
-  .our-friends__slider-page {
-    gap: 40px;
-  }
-}
 .our-friends__slider-page_our-pets {
   width: 1200px;
   display: flex;
@@ -784,15 +788,6 @@ p {
   border-radius: 9px;
   transition: 0.2s;
   cursor: pointer;
-}
-.our-friends__slide:hover {
-  background-color: #FFFFFF;
-  transition: 0.4s;
-}
-.our-friends__slide:hover .our-friends__slide-button {
-  background-color: #FDDCC4;
-  border: 2px solid #FDDCC4;
-  transition: 0.4s;
 }
 
 .our-friends__slide-img {
@@ -856,6 +851,11 @@ p {
   background-color: #FDDCC4;
   border: 2px solid #FDDCC4;
   transition: 0.4s;
+}
+.our-friends__slider-button:disabled {
+  cursor: default;
+  background-color: #F6F6F6;
+  border: 2px solid #CDCDCD;
 }
 .our-friends__slider-button_prev {
   position: absolute;
@@ -1289,6 +1289,9 @@ p {
     z-index: 5;
     margin-right: 42px;
     transition: 0.4s;
+    height: 22px;
+    padding-top: 10px;
+    cursor: pointer;
   }
   .burger-menu._active {
     transform: rotate(90deg);
@@ -1324,7 +1327,7 @@ p {
   height: 500px;
   display: flex;
   gap: 30px;
-  border-radius: 9px;
+  border-radius: 18px;
   background-color: #FAFAFA;
 }
 @media screen and (max-width: 1199.98px) {
@@ -1413,6 +1416,7 @@ p {
 
 .our-friends__card .our-friends__slide-img {
   width: auto;
+  border-radius: 12px;
 }
 @media screen and (max-width: 767.98px) {
   .our-friends__card .our-friends__slide-img {
@@ -1459,6 +1463,19 @@ p {
 .background._active {
   display: block;
   overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in-animation {
+  animation: fadeIn 0.4s ease-in-out;
+  animation-fill-mode: both;
 }
 
 /*# sourceMappingURL=style.css.map */

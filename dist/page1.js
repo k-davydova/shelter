@@ -21,45 +21,6 @@ const toggleBackground = () => {
 
 /***/ }),
 
-/***/ "./src/js/modules/burger.js":
-/*!**********************************!*\
-  !*** ./src/js/modules/burger.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   toggleBurgerNavigation: () => (/* binding */ toggleBurgerNavigation)
-/* harmony export */ });
-/* harmony import */ var _background__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./background */ "./src/js/modules/background.js");
-
-
-const burgerIcon = document.querySelector('.burger-menu');
-
-const toggleBurgerNavigation = () => {
-  const navigation = document.querySelector('.navigation');
-  const background = document.querySelector('.background');
-  const navigationItems = document.querySelectorAll('.navigation__item');
-
-  burgerIcon.classList.toggle('_active');
-  navigation.classList.toggle('_active');
-  (0,_background__WEBPACK_IMPORTED_MODULE_0__.toggleBackground)();
-
-  navigationItems.forEach(item => {
-    item.addEventListener('click', toggleBurgerNavigation);
-  });
-
-  background.addEventListener('click', toggleBurgerNavigation);
-
-};
-
-burgerIcon.addEventListener('click', toggleBurgerNavigation);
-
-
-
-
-/***/ }),
-
 /***/ "./src/js/modules/help.js":
 /*!********************************!*\
   !*** ./src/js/modules/help.js ***!
@@ -74,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const createHelpContent = async () => {
-  const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../assets/json/help.json');
+  const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../../../assets/json/help.json');
 
   const parentElement = document.querySelector('.help__items');
 
@@ -183,31 +144,25 @@ class PetCards {
     this.parent = parent;
   }
 
-  static injectCards() {
-    // console.log(this);
-  }
-
   createSliderPetCards() {
     const slide = document.createElement('div');
+    const img = document.createElement('img');
+    const p = document.createElement('p');
+    const button = document.createElement('button');
 
     slide.classList.add('our-friends__slide');
-    slide.setAttribute('id', `${this.id}`);
-
-    const img = document.createElement('img');
+    slide.id = this.id;
 
     img.classList.add('our-friends__slide-img');
     img.src = this.src;
     img.alt = this.title;
 
-    const p = document.createElement('p');
-
     p.classList.add('our-friends__slide-text');
     p.textContent = this.title;
 
-    const button = document.createElement('button');
-
     button.classList.add('our-friends__slide-button');
     button.textContent = 'Learn more';
+
 
     slide.append(img, p, button);
 
@@ -216,59 +171,51 @@ class PetCards {
 
   createModalPetCards() {
     const modal = document.createElement('div');
-    modal.setAttribute('class', 'our-friends__card');
-    modal.style.zIndex = '5';
-
     const img = document.createElement('img');
-    img.setAttribute('class', 'our-friends__slide-img');
-    img.setAttribute('src', this.src);
-    img.setAttribute('alt', this.title);
-
     const content = document.createElement('div');
-    content.setAttribute('class', 'our-friends__card-content');
-
     const titleWrapper = document.createElement('div');
-    titleWrapper.setAttribute('class', 'our-friends__card-title');
-
     const header = document.createElement('h3');
-    header.setAttribute('class', 'our-friends__card-header');
+    const subheader = document.createElement('h4');
+    const descr = document.createElement('p');
+    const ul = document.createElement('ul');
+    const closeButton = document.createElement('span');
+
+    modal.classList.add('our-friends__card');
+    modal.style.zIndex = '5';
+    modal.classList.add('fade-in-animation');
+
+    img.classList.add('our-friends__slide-img');
+    img.src = this.src;
+    img.alt = this.title;
+
+    content.classList.add('our-friends__card-content');
+
+    titleWrapper.classList.add('our-friends__card-title');
+
+    header.classList.add('our-friends__card-header');
     header.textContent = this.title;
 
-    const subheader = document.createElement('h4');
-    subheader.setAttribute('class', 'our-friends__card-subheader');
+    subheader.classList.add('our-friends__card-subheader');
     subheader.textContent = this.type;
 
-    const descr = document.createElement('p');
-    descr.setAttribute('class', 'our-friends__card-text');
+    descr.classList.add('our-friends__card-text');
     descr.textContent = this.description;
 
-    const ul = document.createElement('ul');
-    ul.setAttribute('class', 'our-friends__card-list');
+    ul.classList.add('our-friends__card-list');
 
-    Object.entries(this.attributes).forEach(([attribute, value]) => {
+    closeButton.classList.add('our-friends__card-button');
+
+    Object.entries(this.attributes).forEach(([ attribute, value ]) => {
       const li = document.createElement('li');
-      li.setAttribute('class', 'our-friends__card-item');
-
       const span = document.createElement('span');
+
+      li.classList.add('our-friends__card-item');
+
       span.textContent = `${attribute}: `;
 
       li.append(span, value);
       ul.append(li);
     });
-
-    // for (const [ attribute, value ] of Object.entries(this.attributes)) {
-    //   const li = document.createElement('li');
-    //   li.setAttribute('class', 'our-friends__card-item');
-
-    //   const span = document.createElement('span');
-    //   span.textContent = `${attribute}: `;
-
-    //   li.append(span, value);
-    //   ul.append(li);
-    // }
-
-    const closeButton = document.createElement('span');
-    closeButton.setAttribute('class', 'our-friends__card-button');
 
     titleWrapper.append(header, subheader);
     content.append(titleWrapper, descr, ul);
@@ -290,8 +237,7 @@ class PetCards {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   addSlidePage: () => (/* binding */ addSlidePage),
-/* harmony export */   moveSlider: () => (/* binding */ moveSlider)
+/* harmony export */   addSlideCards: () => (/* binding */ addSlideCards)
 /* harmony export */ });
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/modules/utils.js");
 /* harmony import */ var _petCards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./petCards */ "./src/js/modules/petCards.js");
@@ -300,125 +246,225 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const sliderNext = document.querySelector('.our-friends__slider-button_next');
 const sliderPrev = document.querySelector('.our-friends__slider-button_prev');
+const sliderNext = document.querySelector('.our-friends__slider-button_next');
+const sliderStart = document.querySelector('.our-friends__slider-button_start');
+const sliderEnd = document.querySelector('.our-friends__slider-button_end');
+const sliderTrack = document.querySelector('.our-friends__slider-track');
 
-let currentCardIndex = 0;
+let flex = -1;
+let isAnimating = false;
+let pageCounter = 1;
+let numberOfCards;
 
-const addSlidePage = async ({ addAtBeginning, numberOfCards, parentSelector }) => {
-  const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../assets/json/pets.json');
-  const parent = document.querySelector(parentSelector);
-  const container = document.createElement('div');
+const numberOfPages = 8; // cколько всего станиц (нужно для пагинации)
 
-  container.classList.add('our-friends__slider-page');
+const changeNumberOfPage = (pageCounter) => {
+  const sliderIndicator = document.querySelector('.our-friends__slider-indicator');
 
-  if (!addAtBeginning) {
-    for (let i = 0; i < numberOfCards; i++) {
-      const currentIndex = (currentCardIndex + i) % data.length;
-      const { id, title, type, description, src } = data[currentIndex];
-      const card = new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(id, title, type, description, src);
-      const slide = card.createSliderPetCards();
-
-      container.append(slide);
+  if (sliderIndicator) {
+    if (event.target === sliderEnd) {
+      sliderIndicator.innerHTML = numberOfPages;
+    } else if (event.target === sliderStart) {
+      sliderIndicator.innerHTML = 1;
+    } else {
+      sliderIndicator.innerHTML = pageCounter;
     }
 
-    parent.append(container);
-
-    currentCardIndex += numberOfCards;
-  } else {
-    currentCardIndex -= 6;
-
-    if (currentCardIndex < 0) {
-      currentCardIndex += data.length;
+    if (sliderIndicator.innerHTML === '1') {
+      sliderStart.disabled = true;
+      sliderPrev.disabled = true;
+      sliderNext.disabled = false;
+      sliderEnd.disabled = false;
+    } else if (sliderIndicator.innerHTML === numberOfPages.toString()) {
+      sliderEnd.disabled = true;
+      sliderNext.disabled = true;
+      sliderPrev.disabled = false;
+      sliderStart.disabled = false;
+    } else {
+      sliderPrev.disabled = false;
+      sliderNext.disabled = false;
+      sliderStart.disabled = false;
+      sliderEnd.disabled = false;
     }
-
-    for (let i = numberOfCards - 1; i >= 0; i--) {
-      const currentIndex = (currentCardIndex + i) % data.length;
-      const { id, title, type, description, src } = data[currentIndex];
-      const card = new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(id, title, type, description, src);
-      const slide = card.createSliderPetCards();
-
-      container.prepend(slide);
-    }
-
-    parent.prepend(container);
-
-    currentCardIndex += numberOfCards;
-
   }
 
-  const listOfPages = parent.childNodes;
+  const sliderIndicatorPage = +sliderIndicator.innerHTML;
+  return sliderIndicatorPage;
+};
 
-  // deleteSlidePage();
+const generateArrayOfRandomNumbers = (length, min, max) => {
+  const arrayOfRandomNumbers = [];
+
+  for (let i = 0; arrayOfRandomNumbers.length < length; i++) {
+    const randomNumber = Math.floor(Math.random() * (max - min)) + min;
+
+    if (!arrayOfRandomNumbers.includes(randomNumber)) {
+      arrayOfRandomNumbers.push(randomNumber);
+    }
+  }
+
+  return arrayOfRandomNumbers;
+};
+
+const getNumberOfCards = () => {
+  const page = document.querySelector('.our-friends__slider-page_our-pets');
+  const screenWidth = window.innerWidth;
+
+  if (event.target === sliderEnd) {
+    const currentPage = pageCounter;
+    pageCounter = numberOfPages;
+    return numberOfPages - currentPage;
+  }
+
+  if (event.target === sliderStart) {
+    const currentPage = pageCounter;
+    pageCounter = 1;
+    return currentPage - 1;
+  }
+
+  if (page) return 1;
+
+  if (screenWidth >= 1280) {
+    return 3;
+  } else if (screenWidth >= 768) {
+    return 2;
+  } else {
+    return 1;
+  }
+};
+
+const addSlideCards = async ({ parentSelector, numberOfPages }) => {
+  const data = await (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getResource)('../../../assets/json/pets.json');
+  const parent = document.querySelector(parentSelector);
+
+  const addSlideCardsToParent = (parent, order) => {
+    order.forEach((index) => {
+      const { id, title, type, description, src } = data[index];
+      const slide = new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(id, title, type, description, src).createSliderPetCards();
+
+      parent.appendChild(slide);
+    });
+  };
+
+  if (numberOfPages) {
+    for (let i = 0; i < numberOfPages; i++) {
+      const page = document.createElement('div');
+
+      page.classList.add('our-friends__slider-page_our-pets');
+      page.setAttribute('data-number', `${i + 1}`);
+
+      const randomOrder = generateArrayOfRandomNumbers(8, 0, 8);
+
+      addSlideCardsToParent(page, randomOrder);
+
+      parent.appendChild(page);
+    }
+  } else {
+    const arrayOfData = [];
+
+    for (let i = 0; i < data.length; i++) {
+      arrayOfData.push(i);
+    }
+
+    addSlideCardsToParent(parent, arrayOfData);
+  }
+
   (0,_modal__WEBPACK_IMPORTED_MODULE_2__.openPetsModal)(data, '.our-friends__wrapper');
 };
 
-// const deleteSlidePage = () => {
-//   const nodeList = document.querySelectorAll('.our-friends__slider-page');
-//   console.log(nodeList);
+const moveSlider = ({ direction }) => {
 
-//   if (nodeList.length > 2) {
-//     const firstElement = nodeList[0];
-//     console.log('hehe');
+  if (isAnimating) return;
+  isAnimating = true;
 
-//     // firstElement.parentNode.removeChild(firstElement);
-//   }
+  numberOfCards = getNumberOfCards();
 
-// };
+  const wrapper = document.querySelector('.our-friends__slider-wrapper');
+  const wrapperWidth = wrapper.offsetWidth;
 
-const moveSlider = (direction) => {
-  const sliderTrack = document.querySelector('.our-friends__slider-track');
-  const page = document.querySelector('.our-friends__slider-page');
-
-  const pageWidth = page.offsetWidth;
   const gapComputedStyle = window.getComputedStyle(sliderTrack);
   const gapValue = +gapComputedStyle.getPropertyValue('gap').slice(0, -2);
 
-  let offset = parseInt(sliderTrack.style.transform.replace('translateX(', '').replace('px)', '')) || 0;
+  const offset = wrapperWidth + gapValue;
 
-  if (direction === 'right') {
-    if (-offset === sliderTrack.offsetWidth + gapValue - pageWidth - gapValue) {
-      addSlidePage({
-        addAtBeginning: false,
-        numberOfCards: 3,
-        parentSelector: '.our-friends__slider-track'
-      });
+  if (direction === 'prev') {
+    if (flex === -1) {
+      for (let i = 0; i < numberOfCards; i++) {
+        sliderTrack.appendChild(sliderTrack.firstElementChild);
+      }
+
+      flex = 1;
     }
 
-    offset -= pageWidth + gapValue;
+    wrapper.style.justifyContent = 'flex-end';
+    sliderTrack.style.transform = `translateX(${offset}px)`;
+
+    if (pageCounter > 1) {
+      pageCounter--;
+    }
   }
 
-  if (direction === 'left') {
-    console.log(offset); //
-    if (offset >= 0) {
-      console.log(offset);
-      addSlidePage({
-        addAtBeginning: true,
-        numberOfCards: 3,
-        parentSelector: '.our-friends__slider-track'
-      });
+  if (direction === 'next') {
+    if (flex === 1) {
+      for (let i = 0; i < numberOfCards; i++) {
+        sliderTrack.prepend(sliderTrack.lastElementChild);
+      }
 
-      sliderTrack.style.transform = `translateX(${offset}px)`;
+      flex = -1;
     }
 
-    // offset += pageWidth + gapValue;
+    wrapper.style.justifyContent = 'flex-start';
+    sliderTrack.style.transform = `translateX(${-offset}px)`;
+
+    if (pageCounter < numberOfPages) {
+      pageCounter++;
+    }
   }
 
-  // sliderTrack.addEventListener('transitionend', () => {
-  // затестить эту штуку
-  // });
-
-  sliderTrack.style.transition = 'transform 0.8s ease-in-out';
-  sliderTrack.style.transform = `translateX(${offset}px)`;
-
-  setTimeout(() => {
-    sliderTrack.style.transition = '';
-  }, 800);
-
+  changeNumberOfPage(pageCounter);
 };
 
-sliderPrev.addEventListener('click', () => moveSlider('left'));
-sliderNext.addEventListener('click', () => moveSlider('right'));
+sliderTrack.addEventListener('transitionend', () => {
+  if (flex === -1) {
+    for (let i = 0; i < numberOfCards; i++) {
+      sliderTrack.appendChild(sliderTrack.firstElementChild);
+    }
+  }
+
+  if (flex === 1) {
+    for (let i = 0; i < numberOfCards; i++) {
+      sliderTrack.prepend(sliderTrack.lastElementChild);
+    }
+  }
+
+  sliderTrack.style.transition = 'none';
+  sliderTrack.style.transform = 'translateX(0)';
+
+  setTimeout(() => {
+    sliderTrack.style.transition = 'all 0.5s';
+    isAnimating = false;
+  });
+
+});
+
+window.addEventListener('resize', getNumberOfCards);
+
+sliderPrev.addEventListener('click', () => {
+  moveSlider({ direction: 'prev' });
+});
+
+sliderNext.addEventListener('click', () => {
+  moveSlider({ direction: 'next' });
+});
+
+sliderStart?.addEventListener('click', () => {
+  moveSlider({ direction: 'prev' });
+});
+
+sliderEnd?.addEventListener('click', () => {
+  moveSlider({ direction: 'next' });
+});
 
 
 
@@ -504,35 +550,25 @@ const getResource = async (src) => {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!**************************!*\
-  !*** ./src/js/script.js ***!
-  \**************************/
+/*!**********************************!*\
+  !*** ./src/pages/main/script.js ***!
+  \**********************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/utils */ "./src/js/modules/utils.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
-/* harmony import */ var _modules_help__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/help */ "./src/js/modules/help.js");
-/* harmony import */ var _modules_petCards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/petCards */ "./src/js/modules/petCards.js");
-/* harmony import */ var _modules_background__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/background */ "./src/js/modules/background.js");
-/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
-
-
-
-
+/* harmony import */ var _js_modules_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../js/modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _js_modules_help__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../js/modules/help */ "./src/js/modules/help.js");
 
 
 
 window.addEventListener('DOMContentLoaded', () => {
 
-  (0,_modules_slider__WEBPACK_IMPORTED_MODULE_1__.addSlidePage)({
-    addAtBeginning: false,
-    numberOfCards: 3,
-    parentSelector: '.our-friends__slider-track'
+  (0,_js_modules_slider__WEBPACK_IMPORTED_MODULE_0__.addSlideCards)({
+    parentSelector: '.our-friends__slider-track',
+    numberOfPages: 0
   });
 
 });
-
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=page1.js.map

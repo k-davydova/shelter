@@ -2,124 +2,224 @@ import { getResource } from './utils';
 import { PetCards } from './petCards';
 import { openPetsModal } from './modal';
 
-const sliderNext = document.querySelector('.our-friends__slider-button_next');
 const sliderPrev = document.querySelector('.our-friends__slider-button_prev');
+const sliderNext = document.querySelector('.our-friends__slider-button_next');
+const sliderStart = document.querySelector('.our-friends__slider-button_start');
+const sliderEnd = document.querySelector('.our-friends__slider-button_end');
+const sliderTrack = document.querySelector('.our-friends__slider-track');
 
-let currentCardIndex = 0;
+let flex = -1;
+let isAnimating = false;
+let pageCounter = 1;
+let numberOfCards;
 
-const addSlidePage = async ({ addAtBeginning, numberOfCards, parentSelector }) => {
-  const data = await getResource('../assets/json/pets.json');
-  const parent = document.querySelector(parentSelector);
-  const container = document.createElement('div');
+const numberOfPages = 8;
 
-  container.classList.add('our-friends__slider-page');
+const changeNumberOfPage = (pageCounter) => {
+  const sliderIndicator = document.querySelector('.our-friends__slider-indicator');
 
-  if (!addAtBeginning) {
-    for (let i = 0; i < numberOfCards; i++) {
-      const currentIndex = (currentCardIndex + i) % data.length;
-      const { id, title, type, description, src } = data[currentIndex];
-      const card = new PetCards(id, title, type, description, src);
-      const slide = card.createSliderPetCards();
-
-      container.append(slide);
+  if (sliderIndicator) {
+    if (event.target === sliderEnd) {
+      sliderIndicator.innerHTML = numberOfPages;
+    } else if (event.target === sliderStart) {
+      sliderIndicator.innerHTML = 1;
+    } else {
+      sliderIndicator.innerHTML = pageCounter;
     }
 
-    parent.append(container);
-
-    currentCardIndex += numberOfCards;
-  } else {
-    currentCardIndex -= 6;
-
-    if (currentCardIndex < 0) {
-      currentCardIndex += data.length;
+    if (sliderIndicator.innerHTML === '1') {
+      sliderStart.disabled = true;
+      sliderPrev.disabled = true;
+      sliderNext.disabled = false;
+      sliderEnd.disabled = false;
+    } else if (sliderIndicator.innerHTML === numberOfPages.toString()) {
+      sliderEnd.disabled = true;
+      sliderNext.disabled = true;
+      sliderPrev.disabled = false;
+      sliderStart.disabled = false;
+    } else {
+      sliderPrev.disabled = false;
+      sliderNext.disabled = false;
+      sliderStart.disabled = false;
+      sliderEnd.disabled = false;
     }
 
-    for (let i = numberOfCards - 1; i >= 0; i--) {
-      const currentIndex = (currentCardIndex + i) % data.length;
-      const { id, title, type, description, src } = data[currentIndex];
-      const card = new PetCards(id, title, type, description, src);
-      const slide = card.createSliderPetCards();
+    const sliderIndicatorPage = +sliderIndicator.innerHTML;
+    return sliderIndicatorPage;
+  }
+};
 
-      container.prepend(slide);
+const generateArrayOfRandomNumbers = (length, min, max) => {
+  const arrayOfRandomNumbers = [];
+
+  for (let i = 0; arrayOfRandomNumbers.length < length; i++) {
+    const randomNumber = Math.floor(Math.random() * (max - min)) + min;
+
+    if (!arrayOfRandomNumbers.includes(randomNumber)) {
+      arrayOfRandomNumbers.push(randomNumber);
     }
-
-    parent.prepend(container);
-
-    currentCardIndex += numberOfCards;
-
   }
 
-  const listOfPages = parent.childNodes;
+  return arrayOfRandomNumbers;
+};
 
-  // deleteSlidePage();
+const getNumberOfCards = () => {
+  const page = document.querySelector('.our-friends__slider-page_our-pets');
+  const screenWidth = window.innerWidth;
+
+  if (event.target === sliderEnd) {
+    const currentPage = pageCounter;
+    pageCounter = numberOfPages;
+    return numberOfPages - currentPage;
+  }
+
+  if (event.target === sliderStart) {
+    const currentPage = pageCounter;
+    pageCounter = 1;
+    return currentPage - 1;
+  }
+
+  if (page) return 1;
+
+  if (screenWidth >= 1280) {
+    return 3;
+  } else if (screenWidth >= 768) {
+    return 2;
+  } else {
+    return 1;
+  }
+};
+
+const addSlideCards = async ({ parentSelector, numberOfPages }) => {
+  const data = await getResource('../../../assets/json/pets.json');
+  const parent = document.querySelector(parentSelector);
+
+  const addSlideCardsToParent = (parent, order) => {
+    order.forEach((index) => {
+      const { id, title, type, description, src } = data[index];
+      const slide = new PetCards(id, title, type, description, src).createSliderPetCards();
+
+      parent.appendChild(slide);
+    });
+  };
+
+  if (numberOfPages) {
+    for (let i = 0; i < numberOfPages; i++) {
+      const page = document.createElement('div');
+
+      page.classList.add('our-friends__slider-page_our-pets');
+      page.setAttribute('data-number', `${i + 1}`);
+
+      const randomOrder = generateArrayOfRandomNumbers(8, 0, 8);
+
+      addSlideCardsToParent(page, randomOrder);
+
+      parent.appendChild(page);
+    }
+  } else {
+    const arrayOfData = [];
+
+    for (let i = 0; i < data.length; i++) {
+      arrayOfData.push(i);
+    }
+
+    addSlideCardsToParent(parent, arrayOfData);
+  }
+
   openPetsModal(data, '.our-friends__wrapper');
 };
 
-// const deleteSlidePage = () => {
-//   const nodeList = document.querySelectorAll('.our-friends__slider-page');
-//   console.log(nodeList);
+const moveSlider = ({ direction }) => {
 
-//   if (nodeList.length > 2) {
-//     const firstElement = nodeList[0];
-//     console.log('hehe');
+  if (isAnimating) return;
+  isAnimating = true;
 
-//     // firstElement.parentNode.removeChild(firstElement);
-//   }
+  numberOfCards = getNumberOfCards();
 
-// };
+  const wrapper = document.querySelector('.our-friends__slider-wrapper');
+  const wrapperWidth = wrapper.offsetWidth;
 
-const moveSlider = (direction) => {
-  const sliderTrack = document.querySelector('.our-friends__slider-track');
-  const page = document.querySelector('.our-friends__slider-page');
-
-  const pageWidth = page.offsetWidth;
   const gapComputedStyle = window.getComputedStyle(sliderTrack);
   const gapValue = +gapComputedStyle.getPropertyValue('gap').slice(0, -2);
 
-  let offset = parseInt(sliderTrack.style.transform.replace('translateX(', '').replace('px)', '')) || 0;
+  const offset = wrapperWidth + gapValue;
 
-  if (direction === 'right') {
-    if (-offset === sliderTrack.offsetWidth + gapValue - pageWidth - gapValue) {
-      addSlidePage({
-        addAtBeginning: false,
-        numberOfCards: 3,
-        parentSelector: '.our-friends__slider-track'
-      });
+  if (direction === 'prev') {
+    if (flex === -1) {
+      for (let i = 0; i < numberOfCards; i++) {
+        sliderTrack.appendChild(sliderTrack.firstElementChild);
+      }
+
+      flex = 1;
     }
 
-    offset -= pageWidth + gapValue;
+    wrapper.style.justifyContent = 'flex-end';
+    sliderTrack.style.transform = `translateX(${offset}px)`;
+
+    if (pageCounter > 1) {
+      pageCounter--;
+    }
   }
 
-  if (direction === 'left') {
-    console.log(offset); //
-    if (offset >= 0) {
-      console.log(offset);
-      addSlidePage({
-        addAtBeginning: true,
-        numberOfCards: 3,
-        parentSelector: '.our-friends__slider-track'
-      });
+  if (direction === 'next') {
+    if (flex === 1) {
+      for (let i = 0; i < numberOfCards; i++) {
+        sliderTrack.prepend(sliderTrack.lastElementChild);
+      }
 
-      sliderTrack.style.transform = `translateX(${offset}px)`;
+      flex = -1;
     }
 
-    // offset += pageWidth + gapValue;
+    wrapper.style.justifyContent = 'flex-start';
+    sliderTrack.style.transform = `translateX(${-offset}px)`;
+
+    if (pageCounter < numberOfPages) {
+      pageCounter++;
+    }
   }
 
-  // sliderTrack.addEventListener('transitionend', () => {
-  // затестить эту штуку
-  // });
-
-  sliderTrack.style.transition = 'transform 0.8s ease-in-out';
-  sliderTrack.style.transform = `translateX(${offset}px)`;
-
-  setTimeout(() => {
-    sliderTrack.style.transition = '';
-  }, 800);
-
+  changeNumberOfPage(pageCounter);
 };
 
-sliderPrev.addEventListener('click', () => moveSlider('left'));
-sliderNext.addEventListener('click', () => moveSlider('right'));
+sliderTrack.addEventListener('transitionend', () => {
+  if (flex === -1) {
+    for (let i = 0; i < numberOfCards; i++) {
+      sliderTrack.appendChild(sliderTrack.firstElementChild);
+    }
+  }
 
-export { addSlidePage, moveSlider };
+  if (flex === 1) {
+    for (let i = 0; i < numberOfCards; i++) {
+      sliderTrack.prepend(sliderTrack.lastElementChild);
+    }
+  }
+
+  sliderTrack.style.transition = 'none';
+  sliderTrack.style.transform = 'translateX(0)';
+
+  setTimeout(() => {
+    sliderTrack.style.transition = 'all 0.5s';
+    isAnimating = false;
+  });
+
+});
+
+window.addEventListener('resize', getNumberOfCards);
+
+sliderPrev.addEventListener('click', () => {
+  moveSlider({ direction: 'prev' });
+});
+
+sliderNext.addEventListener('click', () => {
+  moveSlider({ direction: 'next' });
+});
+
+sliderStart?.addEventListener('click', () => {
+  moveSlider({ direction: 'prev' });
+});
+
+sliderEnd?.addEventListener('click', () => {
+  moveSlider({ direction: 'next' });
+});
+
+export { addSlideCards };
