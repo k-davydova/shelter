@@ -1,4 +1,4 @@
-import { addSlideCards } from '../../js/modules/slider-test';
+import { addSlideCards } from '../../js/modules/slider';
 
 window.addEventListener('DOMContentLoaded', () => {
 

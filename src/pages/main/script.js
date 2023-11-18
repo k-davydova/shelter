@@ -1,4 +1,4 @@
-import { addSlideCards } from '../../js/modules/slider-test';
+import { addSlideCards } from '../../js/modules/slider';
 import { createHelpContent } from '../../js/modules/help';
 
 window.addEventListener('DOMContentLoaded', () => {
