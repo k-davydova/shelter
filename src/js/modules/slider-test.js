@@ -20,7 +20,13 @@ const changeNumberOfPage = (pageCounter) => {
   const sliderIndicator = document.querySelector('.our-friends__slider-indicator');
 
   if (sliderIndicator) {
-    sliderIndicator.innerHTML = pageCounter;
+    if (event.target === sliderEnd) {
+      sliderIndicator.innerHTML = numberOfPages;
+    } else if (event.target === sliderStart) {
+      sliderIndicator.innerHTML = '1';
+    } else {
+      sliderIndicator.innerHTML = pageCounter;
+    }
 
     if (pageCounter === 1) {
       sliderStart.disabled = true;
@@ -62,7 +68,6 @@ const getNumberOfCards = () => {
   }
 
   if (event.target === sliderStart) {
-    console.log(pageCounter);
     return pageCounter;
   }
 
@@ -124,7 +129,6 @@ const moveSlider = ({ direction }) => {
   isAnimating = true;
 
   numberOfCards = getNumberOfCards();
-  console.log(numberOfCards);
 
   const wrapper = document.querySelector('.our-friends__slider-wrapper');
   const wrapperWidth = wrapper.offsetWidth;
@@ -140,12 +144,12 @@ const moveSlider = ({ direction }) => {
         sliderTrack.prepend(sliderTrack.lastElementChild);
       }
       flex = -1;
+      pageCounter++;
     }
 
     wrapper.style.justifyContent = 'flex-start';
     sliderTrack.style.transform = `translateX(${-offset}px)`;
     pageCounter++;
-
   }
 
   if (direction === 'prev') {
@@ -159,6 +163,7 @@ const moveSlider = ({ direction }) => {
 
     wrapper.style.justifyContent = 'flex-end';
     sliderTrack.style.transform = `translateX(${offset}px)`;
+
     pageCounter--;
   }
 
@@ -166,7 +171,7 @@ const moveSlider = ({ direction }) => {
 };
 
 sliderTrack.addEventListener('transitionend', () => {
-  console.log(numberOfCards);
+  // console.log(numberOfCards);
 
   if (flex === -1) {
     for (let i = 0; i < numberOfCards; i++) {
@@ -174,7 +179,7 @@ sliderTrack.addEventListener('transitionend', () => {
     }
   } else {
     for (let i = 0; i < numberOfCards; i++) {
-      console.log(sliderTrack.lastElementChild);
+      // console.log(sliderTrack.lastElementChild);
       sliderTrack.prepend(sliderTrack.lastElementChild);
     }
   }
@@ -191,7 +196,7 @@ sliderTrack.addEventListener('transitionend', () => {
 
 window.addEventListener('resize', getNumberOfCards);
 
-sliderStart.addEventListener('click', () => {
+sliderStart?.addEventListener('click', () => {
   moveSlider({ direction: 'prev' });
 });
 
@@ -200,10 +205,11 @@ sliderPrev.addEventListener('click', () => {
 });
 
 sliderNext.addEventListener('click', () => {
+  console.log('hehe')
   moveSlider({ direction: 'next' });
 });
 
-sliderEnd.addEventListener('click', () => {
+sliderEnd?.addEventListener('click', () => {
   moveSlider({ direction: 'next' });
 });
 

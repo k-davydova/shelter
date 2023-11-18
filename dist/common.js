@@ -70,6 +70,170 @@ burgerIcon.addEventListener('click', toggleBurgerNavigation);
 
 
 
+/***/ }),
+
+/***/ "./src/js/modules/modal.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/modal.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   closePetsModal: () => (/* binding */ closePetsModal),
+/* harmony export */   openPetsModal: () => (/* binding */ openPetsModal)
+/* harmony export */ });
+/* harmony import */ var _background__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./background */ "./src/js/modules/background.js");
+/* harmony import */ var _petCards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./petCards */ "./src/js/modules/petCards.js");
+
+
+
+const openPetsModal = (petsData, parentSelector) => {
+  const parent = document.querySelector(parentSelector);
+  const sliderCards = document.querySelectorAll('.our-friends__slide');
+
+  petsData.forEach((data, index ) => {
+    sliderCards.forEach((card, idx) => {
+      card.addEventListener('click', () => {
+        if (index === idx) {
+          const { id, title, type, description, src, attributes } = petsData[idx];
+
+          new _petCards__WEBPACK_IMPORTED_MODULE_1__.PetCards(id, title, type, description, src, parent, attributes).createModalPetCards();
+          closePetsModal();
+          (0,_background__WEBPACK_IMPORTED_MODULE_0__.toggleBackground)();
+        }
+      });
+    });
+  });
+
+};
+
+const closePetsModal = () => {
+  const modal = document.querySelector('.our-friends__card');
+  const closeButton = document.querySelector('.our-friends__card-button');
+  const background = document.querySelector('.background');
+
+  const closeFunction = () => {
+    modal.remove();
+
+    if (background.classList.contains('_active')) {
+      (0,_background__WEBPACK_IMPORTED_MODULE_0__.toggleBackground)();
+    }
+  };
+
+  closeButton.addEventListener('click', closeFunction);
+  background.addEventListener('click', closeFunction);
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/js/modules/petCards.js":
+/*!************************************!*\
+  !*** ./src/js/modules/petCards.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PetCards: () => (/* binding */ PetCards)
+/* harmony export */ });
+class PetCards {
+  constructor(id, title, type, description, src, parent, attributes) {
+    this.id = id;
+    this.title = title;
+    this.type = type;
+    this.description = description;
+    this.src = src;
+    this.attributes = attributes;
+    this.parent = parent;
+  }
+
+  createSliderPetCards() {
+    const slide = document.createElement('div');
+    const img = document.createElement('img');
+    const p = document.createElement('p');
+    const button = document.createElement('button');
+
+    slide.classList.add('our-friends__slide');
+    slide.id = this.id;
+
+    img.classList.add('our-friends__slide-img');
+    img.src = this.src;
+    img.alt = this.title;
+
+    p.classList.add('our-friends__slide-text');
+    p.textContent = this.title;
+
+    button.classList.add('our-friends__slide-button');
+    button.textContent = 'Learn more';
+
+
+    slide.append(img, p, button);
+
+    return slide;
+  }
+
+  createModalPetCards() {
+    const modal = document.createElement('div');
+    const img = document.createElement('img');
+    const content = document.createElement('div');
+    const titleWrapper = document.createElement('div');
+    const header = document.createElement('h3');
+    const subheader = document.createElement('h4');
+    const descr = document.createElement('p');
+    const ul = document.createElement('ul');
+    const closeButton = document.createElement('span');
+
+    modal.classList.add('our-friends__card');
+    modal.style.zIndex = '5';
+    modal.classList.add('fade-in-animation');
+
+    img.classList.add('our-friends__slide-img');
+    img.src = this.src;
+    img.alt = this.title;
+
+    content.classList.add('our-friends__card-content');
+
+    titleWrapper.classList.add('our-friends__card-title');
+
+    header.classList.add('our-friends__card-header');
+    header.textContent = this.title;
+
+    subheader.classList.add('our-friends__card-subheader');
+    subheader.textContent = this.type;
+
+    descr.classList.add('our-friends__card-text');
+    descr.textContent = this.description;
+
+    ul.classList.add('our-friends__card-list');
+
+    closeButton.classList.add('our-friends__card-button');
+
+    Object.entries(this.attributes).forEach(([ attribute, value ]) => {
+      const li = document.createElement('li');
+      const span = document.createElement('span');
+
+      li.classList.add('our-friends__card-item');
+
+      span.textContent = `${attribute}: `;
+
+      li.append(span, value);
+      ul.append(li);
+    });
+
+    titleWrapper.append(header, subheader);
+    content.append(titleWrapper, descr, ul);
+    modal.append(img, content, closeButton);
+    this.parent.append(modal);
+  }
+
+}
+
+
+
 /***/ })
 
 /******/ 	});
@@ -135,13 +299,12 @@ var __webpack_exports__ = {};
   !*** ./src/js/script.js ***!
   \**************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
-// import { openPetsModal, closePetsModal } from "./modules/modal";
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
+/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
+
 
 
 window.addEventListener('DOMContentLoaded', () => {
-
-
 
 });
 
