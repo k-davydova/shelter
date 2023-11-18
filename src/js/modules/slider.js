@@ -13,7 +13,7 @@ let isAnimating = false;
 let pageCounter = 1;
 let numberOfCards;
 
-const numberOfPages = 8; // cколько всего станиц (нужно для пагинации)
+const numberOfPages = 8;
 
 const changeNumberOfPage = (pageCounter) => {
   const sliderIndicator = document.querySelector('.our-friends__slider-indicator');
@@ -43,10 +43,10 @@ const changeNumberOfPage = (pageCounter) => {
       sliderStart.disabled = false;
       sliderEnd.disabled = false;
     }
-  }
 
-  const sliderIndicatorPage = +sliderIndicator.innerHTML;
-  return sliderIndicatorPage;
+    const sliderIndicatorPage = +sliderIndicator.innerHTML;
+    return sliderIndicatorPage;
+  }
 };
 
 const generateArrayOfRandomNumbers = (length, min, max) => {
