@@ -1,6 +1,6 @@
 # Shelter Website
 ## Overview
-Welcome to my portfolio project showcasing my skills as a frontend developer. This project consists of a small website with two pages, implemented using HTML, CSS, and JavaScript. I leveraged ES6 features such as classes and destructuring to enhance the code structure.
+Welcome to my portfolio project showcasing my skills as a frontend developer. This project consists of a small website with two pages, implemented using HTML, CSS, and JavaScript. I leveraged ES6 features such as classes and destructuring to enhance the code structure. Asynchronously, I utilized ***async/await*** to fetch data for the animal cards from a JSON source.
 
 ## Project Links:
 #### [Live Demo](https://k-davydova.github.io/shelter/src/pages/main/index.html)
@@ -17,13 +17,14 @@ Welcome to my portfolio project showcasing my skills as a frontend developer. Th
 The markup validity was checked using the W3C Markup Validator, ensuring no errors or warnings were present.
 
 ### Responsive Design:
-The site features responsive design for **desktop** (1280px), **tablet** (768px), and **mobile** (320px) screens. **PixelPerfect** was employed to validate the design against the provided Figma layout, with discrepancies kept under 10px.
+#### The site features responsive design for **desktop** (1280px), **tablet** (768px), and **mobile** (320px) screens. 
+#### **PixelPerfect** was employed to validate the design against the provided Figma layout, with discrepancies kept under 10px.
 
 ## Interactive Features:
-#### **Burger Menu**: A responsive burger menu appears at 767px and below.
-#### **Animal Card Modal**: Clicking on an animal card opens a modal window with additional information.
-#### **Infinite Slider**: The Main Page includes an infinite slider.
-#### **Pagination Slider**: The Our Pets Page features a slider with pagination.
+#### ***Burger Menu***: A responsive burger menu appears at 767px and below.
+#### ***Animal Card Modal*** Clicking on an animal card opens a modal window with additional information.
+#### ***Infinite Slider*** The Main Page includes an infinite slider.
+#### ***Pagination Slider*** The Our Pets Page features a slider with pagination.
 
 ## Getting Started
 1. Clone the repository: **`git clone https://github.com/k-davydova/shelter.git`**
