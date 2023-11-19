@@ -25,9 +25,6 @@ The site features responsive design for **desktop** (1280px), **tablet** (768px)
 #### **Infinite Slider**: The Main Page includes an infinite slider.
 #### **Pagination Slider**: The Our Pets Page features a slider with pagination.
 
-***How to Use:***
-To view the project, follow this [Live Demo Link](https://k-davydova.github.io/shelter/src/pages/main/index.html).
-
 ## Getting Started
 1. Clone the repository: **`git clone https://github.com/k-davydova/shelter.git`**
 2. Install dependencies: **`npm install`**
