@@ -20,10 +20,10 @@ The markup validity was checked using the W3C Markup Validator, ensuring no erro
 The site features responsive design for **desktop** (1280px), **tablet** (768px), and **mobile** (320px) screens. **PixelPerfect** was employed to validate the design against the provided Figma layout, with discrepancies kept under 10px.
 
 ## Interactive Features:
-**Burger Menu**: A responsive burger menu appears at 767px and below.
-**Animal Card Modal**: Clicking on an animal card opens a modal window with additional information.
-**Infinite Slider**: The Main Page includes an infinite slider.
-**Pagination Slider**: The Our Pets Page features a slider with pagination.
+#### **Burger Menu**: A responsive burger menu appears at 767px and below.
+#### **Animal Card Modal**: Clicking on an animal card opens a modal window with additional information.
+#### **Infinite Slider**: The Main Page includes an infinite slider.
+#### **Pagination Slider**: The Our Pets Page features a slider with pagination.
 
 ***How to Use:***
 To view the project, follow this [Live Demo Link](https://k-davydova.github.io/shelter/src/pages/main/index.html).
