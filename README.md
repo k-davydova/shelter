@@ -3,8 +3,8 @@
 Welcome to my portfolio project showcasing my skills as a frontend developer. This project consists of a small website with two pages, implemented using HTML, CSS, and JavaScript. I leveraged ES6 features such as classes and destructuring to enhance the code structure.
 
 ## Project Links:
-[Live Demo](https://k-davydova.github.io/shelter/src/pages/main/index.html)
-[Figma Design](https://www.figma.com/file/Yk6EnbY63FyG2PJTFkJDMh/shelter)
+#### [Live Demo](https://k-davydova.github.io/shelter/src/pages/main/index.html)
+#### [Figma Design](https://www.figma.com/file/Yk6EnbY63FyG2PJTFkJDMh/shelter)
 
 ## Project Details
 
